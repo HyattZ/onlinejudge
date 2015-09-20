@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 配置中文 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<!-- 开发者模式 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 设置上传文件的最大值 -->
+	<constant name="struts.multipart.maxSize" value="10701096" />
+	<!-- 设置上传文件的临时文件夹 -->
+	<constant name="struts.multipart.saveDir" value="e:/tmp"></constant>
+	
+	
+    <!-- Add packages here -->
+     <package name="rsgl"  extends="struts-default">
+     
+     		<global-exception-mappings>
+     			<exception-mapping result="error" exception="java.lang.NoSuchFieldException"></exception-mapping>
+     		</global-exception-mappings>
+     		
+     		<!-- 这是获取验证码的链接 -->
+     		<action name="getAuthCode" class="com.onlinejudge.action.AuthCodeAction" method="getAuthCode">
+     				<result name="success">/AuthCode.html</result>
+     		</action>
+     		
+     		<!-- 这是指向登录页面的链接 -->
+     		<action name="loginPage">
+     			<result name="success">/WEB-INF/pages/login.jsp</result>
+     		</action>
+     		
+     		<action name="indexreal">
+     			<result name="success">/WEB-INF/pages/indexreal.jsp</result>
+     		</action>
+     		
+     		<!-- 这是指向注册页面的链接 -->
+     		<action name="registerPage">
+     			<result name="success">/WEB-INF/pages/register.jsp</result>
+     		</action>
+     		
+     		<!-- 这是登录有关操作 -->
+     		<action name="login" class="com.onlinejudge.action.LoginAction" method="checkLogin">
+     			<result name="success"  type="redirectAction">problemList</result>
+     			<result name="authcodeerror" type="redirectAction">error</result>
+     			<result name="passworderror" type="redirectAction">error</result>
+     			<result name= "usernameillegal" type="redirectAction">error</result>
+     		</action>
+     		
+     		<!-- 这是指向主界面的操作 -->
+     		<action name="problemList" class="com.onlinejudge.action.ProblemListAction" method="getMainPage">
+     			<result name="success">/WEB-INF/pages/problemList.jsp</result>
+     		</action>
+     		
+     		<!-- 这是指向错误页面的操作 -->
+     		<action name="error" class="com.onlinejudge.action.RdirectAction" method="TransErrorMessage">
+     			<result name="success">/WEB-INF/pages/error.jsp</result>
+     		</action>
+     		
+     		<!-- 这是指向成功页面的操作 -->
+     		<action name="success" class="com.onlinejudge.action.RdirectAction" method="TransSuccessMessage">
+     			<result name="success">/WEB-INF/pages/success.jsp</result>
+     		</action>
+     		
+     		<!-- 这是提交flag的判断页面 -->
+     		<action name="checkResult" class="com.onlinejudge.action.CheckResultAction" method="checkResult">
+     			<result name="success" type="redirectAction">success</result>
+     			<result name="fail" type="redirectAction">error</result>
+     		</action>
+    </package>
+    
+    <package name="s2sh_json" extends="json-default" namespace="/">
+		<action name="getRank" class="com.onlinejudge.action.RankAction" method="getRank">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="checkUsername" class="com.onlinejudge.action.RegisterAction" method="checkUsername">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="fail" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="checkStuId" class="com.onlinejudge.action.RegisterAction" method="checkStuId">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="getLastestNotice" class="com.onlinejudge.action.NoticeAction" method="getLastestNotice">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<!-- 这是文件上传的操作 -->
+     		<action name="upload" class="com.onlinejudge.action.UploadAction" method="uploadFile">
+     			<param name="savePath">e:/images</param>
+     			<result name="success" type="json">result</result>
+     			<interceptor-ref name="fileUpload">
+     				<!-- 过滤上传文件的类型 -->
+     				<param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg</param>
+     				<!-- 上传文件的大小限制 -->
+     				<param name="maximumSize">1025956</param>
+     			</interceptor-ref>
+     			<interceptor-ref name="defaultStack"></interceptor-ref>
+     		</action>
+     		
+	</package>
+</struts>
