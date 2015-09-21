@@ -37,7 +37,6 @@ public class NoticeAction {
 		this.noticeService = noticeService;
 	}
 	
-	
 	public String getLastestNotice(){
 		Notice notice = noticeService.getLastestNotice();
 		JSONObject json = new JSONObject();

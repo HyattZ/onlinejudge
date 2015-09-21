@@ -15,6 +15,6 @@ import com.onlinejudge.enums.Permission;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface PermissonCheck {
+public @interface PermissionCheck {
 	Permission[] value();
 }

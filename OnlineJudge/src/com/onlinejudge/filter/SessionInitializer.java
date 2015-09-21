@@ -15,12 +15,12 @@ import javax.servlet.http.HttpSession;
  * Servlet Filter implementation class SessionInitializer
  */
 public class SessionInitializer implements Filter {
-    /**
-     * Default constructor. 
-     */
-    public SessionInitializer() {
-    	
-    }
+	/**
+	 * Default constructor.
+	 */
+	public SessionInitializer() {
+
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -32,9 +32,14 @@ public class SessionInitializer implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest servletRequest = (HttpServletRequest) request;
-		servletRequest.getSession().setAttribute("isLogin", false);
+
+		if (servletRequest.getSession().getAttribute("isLogin") == null) {
+			servletRequest.getSession().setAttribute("isLogin", false);
+		}
+
 		chain.doFilter(request, response);
 	}
 

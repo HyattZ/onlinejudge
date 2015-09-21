@@ -4,8 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.RequestAware;
+import org.apache.struts2.util.ServletContextAware;
 
 import com.onlinejudge.constant.Status;
 import com.onlinejudge.domain.Notice;
@@ -19,14 +24,18 @@ import com.onlinejudge.service.ProblemService;
  * @time 2015年9月16日
  * 
  */
-public class ProblemListAction implements RequestAware {
+public class ProblemListAction implements RequestAware,ServletContextAware {
 	private ProblemService problemService;
 	private Map<String, Object> request;
 	private int problemPage;
+	private ServletContext context;
 
-	public ProblemListAction() {
+
+	@Override
+	public void setServletContext(ServletContext context) {
+		this.context = context;
 	}
-
+	
 	public ProblemService getProblemService() {
 		return problemService;
 	}
@@ -55,6 +64,7 @@ public class ProblemListAction implements RequestAware {
 	}
 
 	public String getMainPage() {
+		System.out.println(context.getRealPath(""));
 		long problemCount = problemService.getProblemCount();
 		// 获取可以得到的最大页面数
 		long maxIndex = problemCount / 5;
@@ -110,4 +120,5 @@ public class ProblemListAction implements RequestAware {
 		}
 		return indexs;
 	}
+
 }

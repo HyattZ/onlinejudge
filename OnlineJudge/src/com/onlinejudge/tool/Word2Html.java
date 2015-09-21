@@ -1,7 +1,4 @@
-/**
- * 
- *//*
-
+package com.onlinejudge.tool;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.List;
 
@@ -26,34 +22,21 @@ import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.converter.PicturesManager;
 import org.apache.poi.hwpf.converter.WordToHtmlConverter;
-import org.apache.poi.hwpf.model.PicturesTable;
-import org.apache.poi.hwpf.usermodel.CharacterRun;
-import org.apache.poi.hwpf.usermodel.Paragraph;
 import org.apache.poi.hwpf.usermodel.Picture;
 import org.apache.poi.hwpf.usermodel.PictureType;
-import org.apache.poi.hwpf.usermodel.Range;
-import org.apache.poi.hwpf.usermodel.Table;
-import org.apache.poi.hwpf.usermodel.TableCell;
-import org.apache.poi.hwpf.usermodel.TableIterator;
-import org.apache.poi.hwpf.usermodel.TableRow;
 import org.w3c.dom.Document;
 
-*//**
- * @author: Chembo Huang
- * @since: May 3, 2012
- * @modified: May 3, 2012
- * @version:
- *//*
-public class Word2Html {
 
-	public static void main(String argv[]) {
-		try {
-			convert2Html("D://1.doc","D://1.html");
-		} catch (Exception e) {
+public class Word2Html {
+	
+/*	public static void main(String[] args){
+		try{
+			convert2Html("D:/1.doc", "D:/1.html");
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
-
+	*/
 	public static void writeFile(String content, String path) {
 		FileOutputStream fos = null;
 		BufferedWriter bw = null;
@@ -123,4 +106,3 @@ public class Word2Html {
 		writeFile(new String(out.toByteArray()), outPutFile);
 	}
 }
-*/

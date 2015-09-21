@@ -13,7 +13,7 @@ import com.onlinejudge.annotation.AccessToUrl;
  * 
  */
 @Aspect
-@Component("accessInterceptor")
+@Component
 public class AccessInterceptor {
 	@Before("com.onlinejudge.aop.SystemArchitecture.accessToUrl()&&"+
 			"@annotation(accessToUrl)")

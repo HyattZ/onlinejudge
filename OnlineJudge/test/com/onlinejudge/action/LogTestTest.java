@@ -21,4 +21,9 @@ public class LogTestTest {
 		lt.test();
 	}
 
+	@Test
+	public void testGetPaths(){
+		LogTest lt  = new LogTest();
+		lt.getPaths();
+	}
 }

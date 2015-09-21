@@ -4,23 +4,122 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!doctype html>
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>注册页面</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
+<head>
+<base href="<%=basePath%>">
+<meta charset="utf-8">
+<title>bootstrapLearn</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/hyattoj.css" rel="stylesheet">
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="css/hyattoj.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!--[if It IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 
-  </head>
+</head>
+
+<body>
+
+<!-- 导航栏开始 -->
+<div class="navbar navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container"> <a class="brand" href="#">HITWH-CTF</a>
+      <ul class="nav">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">题目</a></li>
+        <li><a href="#">答案公布</a></li>
+      </ul>
+      <div class="nav pull-right"> <a class="dropdown-toggle navbar-text" data-toggle="dropdown" href="#"><i class="icon-user"></i>Hyatt</a>
+        <ul class="dropdown-menu">
+          <li><a>我的资料</a></li>
+          <li><a>查看排名</a></li>
+          <li><a>退出</a></li>
+        </ul>
+      </div>
+      <!--<ul class="nav pull-right">
+        <li><a href="#login" data-toggle="modal">登录</a></li>
+        <li class="divider-vertical"></li>
+        <li><a href="http://localhost:8080/OnlineJudge/registerPage">注册</a></li>
+      </ul>--> 
+    </div>
+  </div>
+</div>
+<!-- 导航栏结束 -->
+<div>
+  <div class="container">
+    <div class="row">
+      <form class="form-horizontal" action="login" method="post">
+        <div class="modal" id="login">
+          <div class="modal-header">
+            <h4>用户注册</h4>
+          </div>
+          <div class="modal-body">
+            <div class="control-group">
+              <div class="controls">
+                <div class="input-prepend"> <span class="add-on"><i class="icon-user"></i></span>
+                  <input
+											type="text" id="username" name="username"
+											placeholder="请输入用户名">
+                </div>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <div class="input-prepend"> <span class="add-on"><i class="icon-lock"></i></span>
+                  <input
+											type="password" id="password" name="password"
+											placeholder="请输入密码">
+                </div>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <div class="input-prepend"> <span class="add-on"><i class="icon-lock"></i></span>
+                  <input
+											type="password" id="password" name="password"
+											placeholder="请重复输入密码">
+                </div>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <div class="input-prepend"> <span class="add-on"><i class="icon-envelope"></i></span>
+                  <input
+											type="password" id="password" name="password"
+											placeholder="请输入邮箱">
+                </div>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <input type="text" id="authCode" placeholder="验证码"
+										name="authCode" style="width:100px;">
+                <img
+										src="http://localhost:8080/OnlineJudge/getAuthCode"
+										class="authCodeStyle" id="authCodeImg"> <a
+										href="javascript:void(0)" onClick="getAuthCodeAgain()">看不清</a> </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">登录</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
   
-  <body>
-    <form action="upload.action" enctype="multipart/form-data" method="post">
-    	文件：<input type="file" name="image"><br>
-    	<input type="submit" value="上传">
-    </form>
-  </body>
+  <!-- 底部开始 -->
+  <div class="navbar navbar-fixed-bottom footer">
+    <div class="container">
+      <p class="muted credit"> Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>. </p>
+    </div>
+  </div>
+  <!-- 底部结束 --> 
+  
+</div>
+<script src="js/bootstrap.min.js"></script>
+</body>
 </html>

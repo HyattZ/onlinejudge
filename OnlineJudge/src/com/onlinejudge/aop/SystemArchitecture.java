@@ -16,7 +16,7 @@ public class SystemArchitecture {
 	
 	@Pointcut("@annotation(com.onlinejudge.annotation.AccessToUrl)")
 	public void accessToUrl(){}
-	
-	@Pointcut("@annotation(com.onlinejudge.annotation.PermissonCheck)")
+	 
+	@Pointcut("@annotation(com.onlinejudge.annotation.PermissionCheck)")
 	public void checkPermission(){}
 }

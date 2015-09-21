@@ -4,6 +4,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
+import com.onlinejudge.annotation.PermissionCheck;
 import com.onlinejudge.enums.Permission;
 
 /**
@@ -13,11 +14,11 @@ import com.onlinejudge.enums.Permission;
  * 
  */
 @Aspect
-@Component("permissionInterceptor")
+@Component
 public class PermissionInterceptor {
 	@Before("com.onlinejudge.aop.SystemArchitecture.checkPermission()&&"+
 			"@annotation(permission)")
-	public void checkPermission(Permission permission){
-		System.out.println(permission.values()[0]);
+	public void checkPermission(PermissionCheck permission){
+		System.out.println(permission.value()[0]);
 	}
 }

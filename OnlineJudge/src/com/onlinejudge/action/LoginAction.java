@@ -84,7 +84,7 @@ public class LoginAction implements  ServletRequestAware,SessionAware,ModelDrive
 			return Status.PASSWORDERROR;
 		}
 		
-		
+		session.put("isLogin", true);
 		return Status.SUCCESS;
 	}
 	
