@@ -1,6 +1,6 @@
 package com.onlinejudge.dao;
 
-import com.onlinejudge.domain.Notice;
+import com.onlinejudge.domain.database.Notice;
 
 /**
  * @author едаІЬь

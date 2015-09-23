@@ -10,7 +10,8 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
 import com.onlinejudge.dao.ProblemDao;
-import com.onlinejudge.domain.Problem;
+import com.onlinejudge.domain.SubmitPageProblemInfo;
+import com.onlinejudge.domain.database.Problem;
 import com.onlinejudge.dto.ResultFormBean;
 
 /**
@@ -67,5 +68,21 @@ public class ProblemDaoImpl implements ProblemDao{
 				.getCurrentSession().createSQLQuery("select count(*) from Problem")
 				.list().get(0);
 		return count.longValue() ;
+	}
+
+
+	@Override
+	public SubmitPageProblemInfo getSFPProblem(int id) {
+		List list = hibernateTemplate.getSessionFactory()
+										.openSession()
+										.createSQLQuery("select problemid,problemtitle from Problem where problemid="+id)
+										.list();
+		if (list == null || list.size() ==0){
+			return null;
+		}else{
+			Object[] obj = (Object[]) list.get(0);
+			SubmitPageProblemInfo sfp = new SubmitPageProblemInfo((Integer)obj[0],(String)obj[1]);
+			return sfp;
+		}
 	}
 }

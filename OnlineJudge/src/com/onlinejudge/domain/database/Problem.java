@@ -1,4 +1,4 @@
-package com.onlinejudge.domain;
+package com.onlinejudge.domain.database;
 
 import java.util.Set;
 
@@ -26,6 +26,11 @@ public class Problem {
 	
 	public Problem(){
 		
+	}
+	
+	public Problem(int problemid,String problemtitle){
+		this.problemid = problemid;
+		this.problemtitle = problemtitle;
 	}
 
 	public String getFlag() {

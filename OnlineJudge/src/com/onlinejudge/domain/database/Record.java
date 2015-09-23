@@ -1,4 +1,4 @@
-package com.onlinejudge.domain;
+package com.onlinejudge.domain.database;
 
 import java.util.HashSet;
 import java.util.Set;

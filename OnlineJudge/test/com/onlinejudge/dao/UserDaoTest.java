@@ -6,7 +6,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.onlinejudge.domain.User;
+import com.onlinejudge.domain.database.User;
 
 
 /**

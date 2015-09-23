@@ -11,6 +11,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.onlinejudge.constant.Status;
+import com.onlinejudge.domain.database.User;
 import com.onlinejudge.dto.LoginFormBean;
 import com.onlinejudge.service.UserService;
 import com.opensymphony.xwork2.ModelDriven;
@@ -83,8 +84,9 @@ public class LoginAction implements  ServletRequestAware,SessionAware,ModelDrive
 			session.put("errorReason", "√‹¬Î¥ÌŒÛ£°");
 			return Status.PASSWORDERROR;
 		}
-		
+		User u = userService.getUserByUsername(lfb.getUsername());
 		session.put("isLogin", true);
+		session.put("stuid", u.getStuid());
 		return Status.SUCCESS;
 	}
 	

@@ -2,7 +2,8 @@ package com.onlinejudge.service;
 
 import java.util.List;
 
-import com.onlinejudge.domain.Problem;
+import com.onlinejudge.domain.SubmitPageProblemInfo;
+import com.onlinejudge.domain.database.Problem;
 import com.onlinejudge.dto.ResultFormBean;
 
 
@@ -18,4 +19,8 @@ public interface ProblemService {
 	public abstract boolean checkResult(ResultFormBean rfb);
 
 	public abstract long getProblemCount();
+
+	public abstract SubmitPageProblemInfo getSFPProblem(int id);
+
+	public abstract String getFlagByProblemid(int problemid);
 }

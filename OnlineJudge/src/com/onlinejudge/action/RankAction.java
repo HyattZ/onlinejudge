@@ -15,8 +15,10 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 
 
+
+
 import com.onlinejudge.constant.Status;
-import com.onlinejudge.domain.User;
+import com.onlinejudge.domain.database.User;
 import com.onlinejudge.service.UserService;
 
 /**

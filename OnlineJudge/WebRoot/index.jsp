@@ -46,8 +46,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a class="dropdown-toggle navbar-text" data-toggle="dropdown"
 								href="#"><i class="icon-user"></i>Hyatt</a>
 							<ul class="dropdown-menu">
-								<li><a>查看资料</a></li>
-								<li><a>退出</a></li>
+								<li><a href="http://localhost:8080/OnlineJudge/infomationPanel">查看资料</a></li>
+								<li><a href="http://localhost:8080/OnlineJudge/logout">退出</a></li>
 							</ul>
 						</div>
 					</s:if>

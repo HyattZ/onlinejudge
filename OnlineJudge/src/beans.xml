@@ -31,7 +31,7 @@
     <property name="dataSource" ref="dataSource"/>
     <property name="packagesToScan">
       <list>
-      	<value>com.onlinejudge.domain</value>
+      	<value>com.onlinejudge.domain.database</value>
       </list>
     </property>
     

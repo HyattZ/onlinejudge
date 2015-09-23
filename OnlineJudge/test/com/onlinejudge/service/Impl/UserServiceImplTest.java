@@ -7,13 +7,15 @@ import java.util.Set;
 
 
 
+
+
 import net.sf.json.JSONObject;
 
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.onlinejudge.dao.UserDao;
-import com.onlinejudge.domain.User;
+import com.onlinejudge.domain.database.User;
 import com.onlinejudge.service.UserService;
 
 /**

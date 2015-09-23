@@ -1,4 +1,4 @@
-package com.onlinejudge.domain;
+package com.onlinejudge.domain.database;
 
 import java.sql.Date;
 import java.sql.Timestamp;

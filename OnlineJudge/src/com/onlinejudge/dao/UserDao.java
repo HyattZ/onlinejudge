@@ -2,7 +2,8 @@ package com.onlinejudge.dao;
 
 import java.util.List;
 
-import com.onlinejudge.domain.User;
+import com.onlinejudge.domain.InformationPanelUserInfo;
+import com.onlinejudge.domain.database.User;
 
 /**
  * @author ’‘–¶ÃÏ
@@ -21,5 +22,9 @@ public interface UserDao {
 	public abstract boolean existUsername(String userName);
 
 	public abstract boolean isStuIdAvailable(int stuid);
+	
+	public abstract InformationPanelUserInfo getIPUserInformation(int stuid);
+
+	public abstract User getUserByUsername(String username);
 
 }

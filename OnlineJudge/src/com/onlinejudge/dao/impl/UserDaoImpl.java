@@ -12,7 +12,9 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
 import com.onlinejudge.dao.UserDao;
-import com.onlinejudge.domain.User;
+import com.onlinejudge.domain.InformationPanelUserInfo;
+import com.onlinejudge.domain.database.Score;
+import com.onlinejudge.domain.database.User;
 
 /**
  * @author ’‘–¶ÃÏ
@@ -92,6 +94,48 @@ public class UserDaoImpl implements UserDao {
 			return true;
 		}else{
 			return false;
+		}
+	}
+
+
+	@Override
+	public InformationPanelUserInfo getIPUserInformation(int stuid) {
+		List list = hibernateTemplate
+				.getSessionFactory()
+				.getCurrentSession()
+				.createSQLQuery("select stuid,username,nickname,qq,phonenum,email,faviconuri from User where stuid="+stuid)
+				.list();
+		System.out.println(list.size());
+		if (list == null || list.size() ==0){
+			return null;
+		}else{
+			InformationPanelUserInfo ipui= new InformationPanelUserInfo();
+			Object[] obj = (Object[]) list.get(0);
+			ipui.setUsername((String)obj[1]);
+			ipui.setStuid((Integer)obj[0]);
+			ipui.setQq((String)obj[3]);
+			ipui.setPhonenum((String)obj[4]);
+			ipui.setNickname((String)obj[2]);
+			ipui.setEmail((String)obj[5]);
+			ipui.setFaviconuri((String)obj[6]);
+			return ipui;
+		}
+	}
+
+
+	@Override
+	public User getUserByUsername(String username) {
+		
+		List list =hibernateTemplate.getSessionFactory()
+				.getCurrentSession()
+				.createQuery("from User where username='"+username+"'")
+				.list();
+		if (list == null || list.size() == 0){
+			return null;
+		}else{
+			User u = new User();
+			u =(User) list.get(0);
+			return u;
 		}
 	}
 }

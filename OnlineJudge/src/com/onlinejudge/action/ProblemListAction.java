@@ -13,8 +13,8 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.util.ServletContextAware;
 
 import com.onlinejudge.constant.Status;
-import com.onlinejudge.domain.Notice;
-import com.onlinejudge.domain.Problem;
+import com.onlinejudge.domain.database.Notice;
+import com.onlinejudge.domain.database.Problem;
 import com.onlinejudge.service.NoticeService;
 import com.onlinejudge.service.ProblemService;
 

@@ -7,7 +7,8 @@ import javax.persistence.Entity;
 
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
-import com.onlinejudge.domain.Problem;
+import com.onlinejudge.domain.SubmitPageProblemInfo;
+import com.onlinejudge.domain.database.Problem;
 import com.onlinejudge.dto.ResultFormBean;
 
 /**
@@ -22,4 +23,6 @@ public interface ProblemDao {
 	public abstract String getFlagById(int problemid);
 
 	public abstract long getProblemCount();
+
+	public abstract SubmitPageProblemInfo getSFPProblem(int id);
 }

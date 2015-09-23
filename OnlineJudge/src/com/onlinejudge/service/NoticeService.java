@@ -1,6 +1,6 @@
 package com.onlinejudge.service;
 
-import com.onlinejudge.domain.Notice;
+import com.onlinejudge.domain.database.Notice;
 
 /**
  * @author едаІЬь

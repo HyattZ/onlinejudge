@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import com.onlinejudge.dao.NoticeDao;
-import com.onlinejudge.domain.Notice;
+import com.onlinejudge.domain.database.Notice;
 import com.onlinejudge.service.NoticeService;
 
 /**

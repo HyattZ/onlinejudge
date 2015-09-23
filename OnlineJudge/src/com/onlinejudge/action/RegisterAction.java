@@ -10,7 +10,7 @@ import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 
 import com.onlinejudge.constant.Status;
-import com.onlinejudge.domain.User;
+import com.onlinejudge.domain.database.User;
 import com.onlinejudge.dto.RegisterFormBean;
 import com.onlinejudge.service.UserService;
 import com.onlinejudge.tool.MD5;

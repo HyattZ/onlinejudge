@@ -5,7 +5,7 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
+<%@taglib prefix="s" uri="/struts-tags" %>
 <!doctype html>
 <html>
 <head>
@@ -38,15 +38,29 @@
 				<a class="brand" href="http://localhost:8080/OnlineJudge/">HITWH-CTF</a>
 				<ul class="nav">
 					<li><a href="http://localhost:8080/OnlineJudge/">首页</a></li>
-					<li><a href="#">题目</a></li>
-					<li><a href="#">答案公布</a></li>
+					<li><a href="http://localhost:8080/OnlineJudge/problemList">题目</a></li>
+					<li><a href="http://localhost:8080/OnlineJudge/showAnswers">答案公布</a></li>
 				</ul>
-				<ul class="nav pull-right">
-					<li><a href="http://localhost:8080/OnlineJudge/loginPage"
-						data-toggle="modal">登录</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="http://localhost:8080/OnlineJudge/registerPage">注册</a></li>
-				</ul>
+				<s:if test="#session.isLogin">
+					<div class="nav pull-right">
+						<a class="dropdown-toggle navbar-text" data-toggle="dropdown"
+							href="#"><i class="icon-user"></i>Hyatt</a>
+						<ul class="dropdown-menu">
+							<li><a
+								href="http://localhost:8080/OnlineJudge/informationPanel">查看资料</a></li>
+							<li><a href="http://localhost:8080/OnlineJudge/logout">退出</a></li>
+						</ul>
+					</div>
+				</s:if>
+				<s:else>
+					<ul class="nav pull-right">
+						<li><a href="http://localhost:8080/OnlineJudge/loginPage"
+							data-toggle="modal">登录</a></li>
+						<li class="divider-vertical"></li>
+						<li><a href="http://localhost:8080/OnlineJudge/registerPage">注册</a></li>
+					</ul>
+
+				</s:else>
 			</div>
 		</div>
 	</div>
@@ -79,7 +93,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="control-group">
 								<div class="controls">
 									<input type="text" id="authCode" placeholder="验证码"

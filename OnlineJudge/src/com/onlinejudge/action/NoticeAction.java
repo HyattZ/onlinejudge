@@ -8,7 +8,7 @@ import net.sf.json.JSONObject;
 
 import com.onlinejudge.annotation.AccessToUrl;
 import com.onlinejudge.constant.Status;
-import com.onlinejudge.domain.Notice;
+import com.onlinejudge.domain.database.Notice;
 import com.onlinejudge.service.NoticeService;
 
 /**

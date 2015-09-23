@@ -1,4 +1,4 @@
-package com.onlinejudge.domain;
+package com.onlinejudge.domain.database;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

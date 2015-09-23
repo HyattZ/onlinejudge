@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.onlinejudge.dao.ProblemDao;
-import com.onlinejudge.domain.Problem;
+import com.onlinejudge.domain.database.Problem;
 
 /**
  * @author ’‘–¶ÃÏ
@@ -32,5 +32,12 @@ public class ProblemDaoImplTest {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		ProblemDao pd = (ProblemDao) context.getBean("problemDaoImpl");
 		System.out.println(pd.getFlagById(1));
+	}
+	
+	@Test
+	public void testSubmitPageProblemInfo(){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		ProblemDao pd = (ProblemDao) context.getBean("problemDaoImpl");
+		System.out.println(pd.getSFPProblem(1));
 	}
 }

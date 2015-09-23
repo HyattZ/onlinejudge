@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.onlinejudge.dao.ProblemDao;
 import com.onlinejudge.dao.UserDao;
-import com.onlinejudge.domain.Problem;
+import com.onlinejudge.domain.SubmitPageProblemInfo;
+import com.onlinejudge.domain.database.Problem;
 import com.onlinejudge.dto.ResultFormBean;
 import com.onlinejudge.service.ProblemService;
 
@@ -52,6 +53,16 @@ public class ProblemServiceImpl implements ProblemService{
 	public long getProblemCount() {
 		
 		return problemDao.getProblemCount();
+	}
+
+	@Override
+	public SubmitPageProblemInfo getSFPProblem(int id) {
+		return problemDao.getSFPProblem(id);
+	}
+
+	@Override
+	public String getFlagByProblemid(int problemid) {
+		return problemDao.getFlagById(problemid);
 	}
 
 	

@@ -10,7 +10,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import com.onlinejudge.dao.UserDao;
-import com.onlinejudge.domain.User;
+import com.onlinejudge.domain.InformationPanelUserInfo;
+import com.onlinejudge.domain.database.User;
 import com.onlinejudge.service.UserService;
 
 /**
@@ -67,5 +68,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getUserList(int length, int beginIndex) {
 		return userDao.getUserRankList(length, beginIndex);
+	}
+
+	@Override
+	public InformationPanelUserInfo getIPUserInformation(int stuid) {
+		return userDao.getIPUserInformation(stuid);
+	}
+
+	@Override
+	public User getUserByUsername(String username) {
+		return userDao.getUserByUsername(username);
 	}
 }

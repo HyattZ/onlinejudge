@@ -37,7 +37,7 @@ public class ResultFormBean {
 	 * 
 	 * */
 	public boolean validateFlag(){
-		String regex = "^[A-Za-z0-9]+$";
+		String regex = "[A-Za-z0-9]+";
 		return (this.flag.matches(regex) & this.flag.length() < 100 );
 	}
 	

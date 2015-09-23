@@ -12,7 +12,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta charset="utf-8">
 <title>bootstrapLearn</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<!-- <link href="css/bootstrap-responsive.min.css" rel="stylesheet"> -->
 <link href="css/hyattoj.css" rel="stylesheet">
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="css/hyattoj.js"></script>
@@ -40,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a class="dropdown-toggle navbar-text" data-toggle="dropdown"
 								href="#"><i class="icon-user"></i>Hyatt</a>
 							<ul class="dropdown-menu">
-								<li><a>查看资料</a></li>
+								<li><a href="http://localhost:8080/OnlineJudge/informationPanel">查看资料</a></li>
 								<li><a href="http://localhost:8080/OnlineJudge/logout">退出</a></li>
 							</ul>
 						</div>
