@@ -107,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<span>昵称</span>
 							</div>
 							<div class="informationContent">
-								<span><s:property value="#request.ipui.nickname" /></span>
+								<span><s:property value="#request.ipui.realname" /></span>
 							</div>
 						</div>
 						<div class="informationItem">

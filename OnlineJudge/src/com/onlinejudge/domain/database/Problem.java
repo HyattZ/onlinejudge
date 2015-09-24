@@ -23,14 +23,20 @@ public class Problem {
 	private double mark;
 	private String problemtitle;
 	private Set<Record> records;
+	private String problemcontent;
+	private Set<SubmitTime> submittimes;
 	
 	public Problem(){
 		
 	}
 	
-	public Problem(int problemid,String problemtitle){
-		this.problemid = problemid;
-		this.problemtitle = problemtitle;
+	
+	public String getProblemcontent() {
+		return problemcontent;
+	}
+
+	public void setProblemcontent(String problemcontent) {
+		this.problemcontent = problemcontent;
 	}
 
 	public String getFlag() {
@@ -66,6 +72,18 @@ public class Problem {
 	public void setRecords(Set<Record> records) {
 		this.records = records;
 	}
+	
+	@OneToMany
+	@JoinColumn(name="problemid")
+	public Set<SubmitTime> getSubmittimes() {
+		return submittimes;
+	}
+
+	
+	public void setSubmittimes(Set<SubmitTime> submittimes) {
+		this.submittimes = submittimes;
+	}
+
 
 	public String getProblemtitle() {
 		return problemtitle;
@@ -78,6 +96,7 @@ public class Problem {
 	@Override
 	public String toString() {
 		return "Problem [problemid=" + problemid + ", flag=" + flag + ", mark="
-				+ mark + ", problemtitle=" + problemtitle + "]";
+				+ mark + ", problemtitle=" + problemtitle + ", records="
+				+ records + ", problemcontent=" + problemcontent + "]";
 	}
 }

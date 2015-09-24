@@ -40,4 +40,11 @@ public class ProblemDaoImplTest {
 		ProblemDao pd = (ProblemDao) context.getBean("problemDaoImpl");
 		System.out.println(pd.getSFPProblem(1));
 	}
+	
+	@Test
+	public void testGetProblemByProblemid(){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		ProblemDao pd = (ProblemDao) context.getBean("problemDaoImpl");
+		System.out.println(pd.getProblemByProblemid(1));
+	}
 }

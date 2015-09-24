@@ -59,14 +59,14 @@
 	
 	<!-- 事务XML配置 -->
 	<aop:config>
-		<aop:pointcut expression="execution(public * com.zxt.rsgl.service..*.*(..))" id="businessService"/>
+		<aop:pointcut expression="execution(public * com.onlinejudge.dao.impl..*.*(..))" id="businessService"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="businessService" />
 	</aop:config>
 	
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
 			<tx:method name="get*" read-only="true"/>
-			<tx:method name="save" propagation="REQUIRED"/>
+			<tx:method name="save*" propagation="REQUIRED"/>
 			<tx:method name="update*" propagation="REQUIRED"/>
 			<tx:method name="delete*" propagation="REQUIRED"/>
 			<tx:method name="register*" propagation="REQUIRED"/>

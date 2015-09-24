@@ -9,6 +9,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.engine.CascadeStyle;
+
 /**
  * @author ’‘–¶ÃÏ
  *
@@ -21,13 +24,14 @@ public class User {
 	private int stuid;
 	private String username;
 	private String password;
-	private String nickname;
+	private String realname;
 	private String qq;
 	private String phonenum;
 	private String email;
 	private String faviconuri;
 	private Set<Record> records;
 	private Score score;
+	private Set<SubmitTime> submittimes;
 	
 	public User(){
 		
@@ -39,10 +43,6 @@ public class User {
 
 	public String getFaviconuri() {
 		return faviconuri;
-	}
-
-	public String getNickname() {
-		return nickname;
 	}
 
 	public String getPassword() {
@@ -73,9 +73,6 @@ public class User {
 		this.faviconuri = faviconuri;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
 
 	public void setPassword(String password) {
 		this.password = password;
@@ -105,6 +102,16 @@ public class User {
 	public void setRecords(Set<Record> records) {
 		this.records = records;
 	}
+	@OneToMany
+	@JoinColumn(name="stuid")
+	public Set<SubmitTime> getSubmittimes() {
+		return submittimes;
+	}
+
+	public void setSubmittimes(Set<SubmitTime> submittimes) {
+		this.submittimes = submittimes;
+	}
+
 	@OneToOne
 	@JoinColumn(name="stuid")
 	public Score getScore() {
@@ -115,12 +122,23 @@ public class User {
 		this.score = score;
 	}
 
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
+	
+
 	@Override
 	public String toString() {
 		return "User [stuid=" + stuid + ", username=" + username
-				+ ", password=" + password + ", nickname=" + nickname + ", qq="
+				+ ", password=" + password + ", realname=" + realname + ", qq="
 				+ qq + ", phonenum=" + phonenum + ", email=" + email
-				+ ", faviconuri=" + faviconuri + ", score=" + score.getScore() + "]";
+				+ ", faviconuri=" + faviconuri + ", records=" + records
+				+ ", score=" + score + "]";
 	}
+
 
 }

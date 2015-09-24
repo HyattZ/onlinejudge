@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<%@taglib prefix="s" uri="/struts-tags" %>
+<%@taglib prefix="s" uri="/struts-tags"%>
 <!doctype html>
 <html>
 <head>
@@ -13,12 +13,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/hyattoj.css" rel="stylesheet">
 <script src="js/jquery-1.11.3.min.js"></script>
-<script src="css/hyattoj.js"></script>
+<script src="js/hyattoj.js"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <!--[if It IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-
+<script type="text/javascript" language="javascript">
+	$(document).ready(function(e) {
+        $("#passwordAgain").blur(function(e) {
+            if (!checkPasswordAgain()){
+				$("#passwordRepeatError").attr("class","text-error");
+				}else{
+				$("#passwordRepeatError").attr("class","text-error hide");	
+				}
+        });
+		$("#stuid").blur(function(e) {
+			
+            if (!checkStuid()){
+				$("#stuidError").attr("class","text-error");
+			}else{
+				$("#stuidError").attr("class","text-error hide");
+			}
+        });
+		$("#username").blur(function(e) {
+            if (!checkUsername()){
+				$("#UsernameError").attr("class","text-error");
+			}else{
+				$("#UsernameError").attr("class","text-error hide");
+			}
+        });
+		$("#email").blur(function(e) {
+            if (!checkEmail()){
+				$("#EmailError").attr("class","text-error");
+			}else{
+				$("#EmailError").attr("class","text-error hide");
+			}
+        });
+        $("#realname").blur(function(e) {
+        
+            if (!checkRealname()){
+				$("#RealnameError").attr("class","text-error");
+			}else{
+				$("#RealnameError").attr("class","text-error hide");
+			}
+        });
+		$("#password").blur(function(e) {
+            if (!checkPassword()){
+				$("#PasswordError").attr("class","text-error");
+			}else{
+				$("#PasswordError").attr("class","text-error hide");
+			}
+        });
+    });
+</script>
 </head>
 
 <body>
@@ -60,46 +107,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div>
 		<div class="container">
 			<div class="row">
-				<form class="form-horizontal" action="login" method="post">
-					<div class="modal" id="login">
+				<form class="form-horizontal" action="register" method="post">
+					<div class="modal" id="login" style="margin-top:-15px;">
 						<div class="modal-header">
 							<h4>用户注册</h4>
 						</div>
 						<div class="modal-body">
 							<div class="control-group">
 								<div class="controls">
-									<div class="input-prepend">
-										<span class="add-on"><i class="icon-user"></i></span> <input
-											type="text" id="username" name="username"
-											placeholder="请输入用户名">
-									</div>
+									<input type="text" id="stuid" name="stuid"
+										placeholder="请输入学号"><span id="stuidError"
+										class="text-error hide"><i class="icon-remove"></i>手机号格式错误！</span>
 								</div>
 							</div>
 							<div class="control-group">
 								<div class="controls">
-									<div class="input-prepend">
-										<span class="add-on"><i class="icon-lock"></i></span> <input
-											type="password" id="password" name="password"
-											placeholder="请输入密码">
-									</div>
+									<input type="text" id="username" name="username"
+										placeholder="请输入用户名"><span id="UsernameError"
+										class="text-error hide"><i class="icon-remove"></i>用户名非法！</span>
 								</div>
 							</div>
 							<div class="control-group">
 								<div class="controls">
-									<div class="input-prepend">
-										<span class="add-on"><i class="icon-lock"></i></span> <input
-											type="password" id="password" name="password"
-											placeholder="请重复输入密码">
-									</div>
+									<input type="text" id="realname" name="realname"
+										placeholder="请输入真实姓名"><span id="RealnameError"
+										class="text-error hide"><i class="icon-remove"></i>姓名非法！</span>
 								</div>
 							</div>
 							<div class="control-group">
 								<div class="controls">
-									<div class="input-prepend">
-										<span class="add-on"><i class="icon-envelope"></i></span> <input
-											type="password" id="password" name="password"
-											placeholder="请输入邮箱">
-									</div>
+									<input type="password" id="password" name="password"
+										placeholder="请输入密码"><span id="PasswordError"
+										class="text-error hide"><i class="icon-remove"></i>密码格式错误！</span>
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<input type="password" id="passwordAgain" name="passwordAgain"
+										placeholder="请重复输入密码"><span id="passwordRepeatError"
+										class="text-error hide"><i class="icon-remove"></i>两次密码不同!</span>
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<input type="text" id="email" name="email" placeholder="请输入邮箱"><span
+										id="EmailError" class="text-error hide"><i
+										class="icon-remove"></i>邮箱格式错误！</span>
 								</div>
 							</div>
 							<div class="control-group">

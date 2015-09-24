@@ -79,4 +79,9 @@ public class UserServiceImpl implements UserService {
 	public User getUserByUsername(String username) {
 		return userDao.getUserByUsername(username);
 	}
+
+	@Override
+	public boolean checkEmail(String email) {
+		return userDao.isEmailAvailable(email);
+	}
 }

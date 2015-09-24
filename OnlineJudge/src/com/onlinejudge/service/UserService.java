@@ -29,5 +29,7 @@ public interface UserService{
 	public abstract InformationPanelUserInfo getIPUserInformation(int stuid);
 	
 	public abstract User getUserByUsername(String username);
+	
+	public abstract boolean checkEmail(String email);
 
 }

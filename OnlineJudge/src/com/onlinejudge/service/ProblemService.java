@@ -23,4 +23,6 @@ public interface ProblemService {
 	public abstract SubmitPageProblemInfo getSFPProblem(int id);
 
 	public abstract String getFlagByProblemid(int problemid);
+
+	public abstract Problem getProblemByProblemid(int problemid);
 }

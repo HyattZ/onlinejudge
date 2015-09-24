@@ -15,5 +15,6 @@ public final class Status {
 	public static final String EMAILILLEGAL = "emailillegal";
 	public static final String PARAMSILLEGAL = "paramsilegal";
 	public static final String FLAGERROR = "flagerror";
+	public static final String UPDATEFAIL = "updateError";
 	
 }

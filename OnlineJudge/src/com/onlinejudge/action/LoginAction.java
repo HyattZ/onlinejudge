@@ -1,5 +1,8 @@
 package com.onlinejudge.action;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -10,6 +13,7 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.onlinejudge.annotation.AccessToUrl;
 import com.onlinejudge.constant.Status;
 import com.onlinejudge.domain.database.User;
 import com.onlinejudge.dto.LoginFormBean;
@@ -84,10 +88,17 @@ public class LoginAction implements  ServletRequestAware,SessionAware,ModelDrive
 			session.put("errorReason", "密码错误！");
 			return Status.PASSWORDERROR;
 		}
+		//登录完成过后一些全局变量的设置和处理
 		User u = userService.getUserByUsername(lfb.getUsername());
 		session.put("isLogin", true);
 		session.put("stuid", u.getStuid());
+		
 		return Status.SUCCESS;
 	}
 	
+	private Date getDate(Date date) throws ParseException{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-NN-dd");
+		String dateString = sdf.format(date);
+		return sdf.parse(dateString);
+	}
 }

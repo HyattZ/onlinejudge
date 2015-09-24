@@ -58,7 +58,7 @@ public class RegisterAction implements ModelDriven{
 	}
 	
 	public String register(){
-		
+
 		User u = new User();
 		 
 		if (rfb.validateEmail()){
@@ -66,15 +66,9 @@ public class RegisterAction implements ModelDriven{
 		}else{
 			return Status.PARAMSILLEGAL;
 		}
-		
-		if (rfb.validateFaviconuri()){
-			u.setFaviconuri(getRfb().getFaviconuri());
-		}else{
-			return Status.PARAMSILLEGAL;
-		}
-		
-		if (rfb.validateNickName()){
-			u.setNickname(getRfb().getNickname());
+
+		if (rfb.validateRealName()){
+			u.setRealname(getRfb().getRealname());
 		}else{
 			return Status.PARAMSILLEGAL;
 		}
@@ -85,19 +79,7 @@ public class RegisterAction implements ModelDriven{
 			return Status.PARAMSILLEGAL;
 		}
 		
-		if (rfb.validatePhonenum()){
-			u.setPhonenum(getRfb().getPhonenum());
-		}else{
-			return Status.PARAMSILLEGAL;
-		}
-		
-		if (rfb.validateQQ()){
-			u.setQq(getRfb().getQq());
-		}else{
-			return Status.PARAMSILLEGAL;
-		}
-		
-		if (rfb.validateStuId()){
+		if (rfb.validateStuid()){
 			u.setStuid(getRfb().getStuid());
 		}else{
 			return Status.PARAMSILLEGAL;
@@ -109,12 +91,13 @@ public class RegisterAction implements ModelDriven{
 			return Status.PARAMSILLEGAL;
 		}
 		
+		System.out.println(u);
+		
 		if (getUserService().saveUser(u)){
 			return Status.SUCCESS;
 		}else{
 			return Status.FAIL;
 		}
-		
 	}
 	
 	/**
@@ -144,12 +127,28 @@ public class RegisterAction implements ModelDriven{
 	
 	public String checkStuId(){
 		Map<String , Boolean> map = new HashMap<String,Boolean>();
-		boolean status = userService.checkStuId(rfb.getStuid());
-		System.out.println(status);
+		boolean status = false;
+		
+		if (rfb.validateStuid()){
+			status = userService.checkStuId(rfb.getStuid());
+		}
+		
 		map.put("stuidStatus", status);
 		JSONObject json = JSONObject.fromObject(map);
 		result = json.toString();
 		return Status.SUCCESS;
 		
+	}
+	
+	public String checkEmail(){
+		Map<String , Boolean> map = new HashMap<String,Boolean>();
+		boolean status = false;
+		if (rfb.validateEmail()){
+			status = userService.checkEmail(rfb.getEmail());
+		}
+		map.put("emailStatus", status);
+		JSONObject json = JSONObject.fromObject(map);
+		result = json.toString();
+		return Status.SUCCESS;
 	}
 }

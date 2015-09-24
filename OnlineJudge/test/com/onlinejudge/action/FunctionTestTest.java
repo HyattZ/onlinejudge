@@ -2,6 +2,12 @@ package com.onlinejudge.action;
 
 import static org.junit.Assert.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 import org.junit.Test;
 
 /**
@@ -24,5 +30,18 @@ public class FunctionTestTest {
 			System.out.println("======================");
 		}
 	}
+	
+	@Test
+	public void testDateCompare() throws ParseException{
+		
+		/*System.out.println(date.compareTo(new Date()));*/
 
+		String dateString = "2015-09-25";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd",Locale.CHINA);
+		Date d = sdf.parse(dateString);
+		String currentDateString = sdf.format(new Date());
+		Date cd = sdf.parse(currentDateString);
+		System.out.println(cd.compareTo(d));
+		
+	}
 }

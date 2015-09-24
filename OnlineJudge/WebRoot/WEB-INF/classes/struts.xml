@@ -26,6 +26,7 @@
      				<result name="success">/AuthCode.html</result>
      		</action>
      		
+     		<!-- 这是获取到头像的链接 -->
      		<action name="getFavicon" class="com.onlinejudge.action.GetFaviconAction" method="getFavicon">
      				<result name="success">/getFavicon.html</result>
      		</action>
@@ -88,6 +89,15 @@
      			<result name="success">/WEB-INF/pages/success.jsp</result>
      		</action>
      		
+     		<!-- 这是展示答案列表的链接 -->
+     		<action name="showAnswers">
+     			<result name="success">/WEB-INF/pages/showAnswers.jsp</result>
+     		</action>
+     		
+     		<!-- 这是注册的链接 -->
+     		<action name="register" class="com.onlinejudge.action.RegisterAction"  method="register">
+     			<result name="success"  type="redirectAction">success</result>
+     		</action>
     </package>
     
     <package name="s2sh_json" extends="json-default" namespace="/">
@@ -106,6 +116,12 @@
 		</action>
 		
 		<action name="checkStuId" class="com.onlinejudge.action.RegisterAction" method="checkStuId">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="checkEmail" class="com.onlinejudge.action.RegisterAction" method="checkEmail">
 			<result name="success" type="json">
 				<param name="root">result</param>
 			</result>

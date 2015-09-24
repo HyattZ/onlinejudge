@@ -27,4 +27,6 @@ public interface UserDao {
 
 	public abstract User getUserByUsername(String username);
 
+	public abstract boolean isEmailAvailable(String email);
+
 }

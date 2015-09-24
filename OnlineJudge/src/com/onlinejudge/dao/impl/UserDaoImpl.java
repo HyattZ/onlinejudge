@@ -55,7 +55,7 @@ public class UserDaoImpl implements UserDao {
 			hibernateTemplate.save(u);
 			return true;
 		}catch(Exception e){
-			logger.error("数据库出错"+e.getMessage()+"!"+u+"未存入数据库！");
+			logger.error("数据库出错:"+e.getMessage()+"!"+u+"未存入数据库！");
 			return false;
 		}
 		
@@ -103,7 +103,7 @@ public class UserDaoImpl implements UserDao {
 		List list = hibernateTemplate
 				.getSessionFactory()
 				.getCurrentSession()
-				.createSQLQuery("select stuid,username,nickname,qq,phonenum,email,faviconuri from User where stuid="+stuid)
+				.createSQLQuery("select stuid,username,realname,qq,phonenum,email,faviconuri from User where stuid="+stuid)
 				.list();
 		System.out.println(list.size());
 		if (list == null || list.size() ==0){
@@ -115,7 +115,7 @@ public class UserDaoImpl implements UserDao {
 			ipui.setStuid((Integer)obj[0]);
 			ipui.setQq((String)obj[3]);
 			ipui.setPhonenum((String)obj[4]);
-			ipui.setNickname((String)obj[2]);
+			ipui.setRealname((String)obj[2]);
 			ipui.setEmail((String)obj[5]);
 			ipui.setFaviconuri((String)obj[6]);
 			return ipui;
@@ -136,6 +136,19 @@ public class UserDaoImpl implements UserDao {
 			User u = new User();
 			u =(User) list.get(0);
 			return u;
+		}
+	}
+
+
+	@Override
+	public boolean isEmailAvailable(String email) {
+		
+		List list = hibernateTemplate.getSessionFactory().getCurrentSession()
+				.createQuery("from User u where u.email='"+email+"'").list();
+		if (list.isEmpty() && list.size() == 0){
+			return true;
+		}else{
+			return false;
 		}
 	}
 }

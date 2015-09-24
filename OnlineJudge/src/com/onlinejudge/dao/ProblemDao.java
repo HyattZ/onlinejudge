@@ -25,4 +25,6 @@ public interface ProblemDao {
 	public abstract long getProblemCount();
 
 	public abstract SubmitPageProblemInfo getSFPProblem(int id);
+
+	public abstract Problem getProblemByProblemid(int problemid);
 }

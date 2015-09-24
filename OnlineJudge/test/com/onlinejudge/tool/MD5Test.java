@@ -17,7 +17,8 @@ public class MD5Test {
 	 */
 	@Test
 	public void testGetMD5Code() {
-		System.out.println(MD5.GetMD5Code("ehe").length());
+		System.out.println(MD5.GetMD5Code("ehe"));
+		System.out.println(MD5.GetMD5Code("ehe"));
 	}
 
 }

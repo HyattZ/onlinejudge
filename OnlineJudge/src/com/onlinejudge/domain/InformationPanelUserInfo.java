@@ -9,7 +9,7 @@ package com.onlinejudge.domain;
 public class InformationPanelUserInfo {
 	private int stuid;
 	private String username;
-	private String nickname;
+	private String realname;
 	private String qq;
 	private String email;
 	private String phonenum;
@@ -26,11 +26,11 @@ public class InformationPanelUserInfo {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getRealname() {
+		return realname;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setRealname(String realname) {
+		this.realname = realname;
 	}
 	public String getQq() {
 		return qq;
@@ -59,7 +59,7 @@ public class InformationPanelUserInfo {
 	@Override
 	public String toString() {
 		return "InformationPanelUserInfo [stuid=" + stuid + ", username="
-				+ username + ", nickname=" + nickname + ", qq=" + qq
+				+ username + ", realname=" + realname + ", qq=" + qq
 				+ ", email=" + email + ", phonenum=" + phonenum
 				+ ", faviconuri=" + faviconuri + "]";
 	}

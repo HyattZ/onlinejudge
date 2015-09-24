@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Component;
 
+import com.onlinejudge.tool.MD5;
+
 /**
  * @author едаІЬь
  *
@@ -47,7 +49,7 @@ public class LoginFormBean {
 	
 	public boolean validatePassword(String password){
 
-		if (this.password.equals(password)){
+		if (password.equals(MD5.GetMD5Code(this.password))){
 			return true;
 		}else{
 			return false;

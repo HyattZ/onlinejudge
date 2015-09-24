@@ -4,21 +4,18 @@ import javax.annotation.Resource;
 
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
+import com.onlinejudge.domain.database.Score;
+
 /**
  * @author 赵笑天
  *
  * @time 2015年9月15日
  * 
  */
-public class ScoreDao {
-	private HibernateTemplate hibernateTemplate;
+public interface ScoreDao {
 
-	public HibernateTemplate getHibernateTemplate() {
-		return hibernateTemplate;
-	}
+	Score getScoreByStuid(int intValue);
+
+	void updateScore(Score score, double d);
 	
-	@Resource
-	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-		this.hibernateTemplate = hibernateTemplate;
-	}
 }

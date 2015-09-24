@@ -85,4 +85,14 @@ public class ProblemDaoImpl implements ProblemDao{
 			return sfp;
 		}
 	}
+
+
+	@Override
+	public Problem getProblemByProblemid(int problemid) {
+		Problem problem = (Problem) hibernateTemplate.getSessionFactory()
+			.getCurrentSession()
+			.get(com.onlinejudge.domain.database.Problem.class, problemid);
+		
+		return problem;
+	}
 }

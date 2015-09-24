@@ -58,6 +58,7 @@ public class RankAction implements ServletRequestAware{
 	public String getRank(){
 		try{
 			JSONArray jsonArray = new JSONArray();
+
 			jsonArray.addAll(userService.getUserList(5, 0));
 			JSONObject json = new JSONObject();
 			json.accumulate("users", jsonArray);
@@ -65,6 +66,7 @@ public class RankAction implements ServletRequestAware{
 			System.out.println(result);
 			return Status.SUCCESS;
 		}catch(Exception e){
+			e.printStackTrace();
 			logger.error("获取排行榜失败！原因："+e.getMessage());
 			return Status.FAIL;
 		}

@@ -65,6 +65,11 @@ public class ProblemServiceImpl implements ProblemService{
 		return problemDao.getFlagById(problemid);
 	}
 
+	@Override
+	public Problem getProblemByProblemid(int problemid) {
+		return problemDao.getProblemByProblemid(problemid);
+	}
+
 	
 
 }
