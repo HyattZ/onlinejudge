@@ -1,4 +1,7 @@
 package com.onlinejudge.action;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Calendar;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -17,9 +20,13 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 
 
+
+
+
 import com.onlinejudge.constant.Status;
 import com.onlinejudge.domain.database.User;
 import com.onlinejudge.service.UserService;
+import com.onlinejudge.tool.ConfigsOperator;
 
 /**
  * @author ’‘–¶ÃÏ
@@ -33,6 +40,7 @@ public class RankAction implements ServletRequestAware{
 	private UserService userService;
 	private HttpServletRequest request;
 	private String result;
+
 
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
@@ -72,4 +80,19 @@ public class RankAction implements ServletRequestAware{
 		}
 	}
 	
+	public String getWeeklyRank(){
+		
+		return Status.SUCCESS;
+	}
+	
+	private boolean dealRecordWeek() throws FileNotFoundException, IOException{
+		/*ConfigsOperator operator = new ConfigsOperator();
+		String recordWeek = operator.readProperties("recordWeek");
+		Calendar cal = Calendar.getInstance();
+		String currentWeek = cal.get(Calendar.YEAR)+"-"+cal.get(Calendar.WEEK_OF_YEAR);
+		if (!currentWeek.equals(recordWeek)){
+			operator.writeProperties("recordWeek",currentWeek);
+		}*/
+		return true;
+	}
 }
