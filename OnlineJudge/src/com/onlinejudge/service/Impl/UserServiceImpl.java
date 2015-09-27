@@ -9,9 +9,12 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
+import com.onlinejudge.dao.RecordDao;
 import com.onlinejudge.dao.UserDao;
 import com.onlinejudge.domain.InformationPanelUserInfo;
+import com.onlinejudge.domain.RankListItemInfo;
 import com.onlinejudge.domain.database.User;
+import com.onlinejudge.domain.database.WeeklyScore;
 import com.onlinejudge.service.UserService;
 
 /**
@@ -22,29 +25,30 @@ import com.onlinejudge.service.UserService;
  */
 @Component("userServiceImpl")
 public class UserServiceImpl implements UserService {
-	
+
 	private UserDao userDao;
 
 	public UserDao getUserDao() {
 		return userDao;
 	}
+
 	@Resource(name = "userDaoImpl")
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-	
+
 	@Override
-	public LinkedHashMap<String, User> getUserMap(int length,int beginIndex){
-		LinkedHashMap<String,User> users = new LinkedHashMap<String,User>();
+	public LinkedHashMap<String, User> getUserMap(int length, int beginIndex) {
+		LinkedHashMap<String, User> users = new LinkedHashMap<String, User>();
 		List<User> usersList = userDao.getUserRankList(length, beginIndex);
-		 
-		for (int i = beginIndex ; i< beginIndex+length; i++){
-			users.put((i-beginIndex)+"", usersList.get(i-beginIndex));
+
+		for (int i = beginIndex; i < beginIndex + length; i++) {
+			users.put((i - beginIndex) + "", usersList.get(i - beginIndex));
 		}
-		
+
 		return users;
 	}
-	
+
 	@Override
 	public String getPasswordByUserName(String userName) {
 		return userDao.getPasswordByUserName(userName);
@@ -66,8 +70,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> getUserList(int length, int beginIndex) {
-		return userDao.getUserRankList(length, beginIndex);
+	public List<RankListItemInfo> getUserList(int length, int beginIndex) {
+		List<User> users = userDao.getUserRankList(length, beginIndex);
+		if (users != null && users.size() > 0) {
+			List<RankListItemInfo> rankListItems = new ArrayList<RankListItemInfo>();
+			
+			for (User u : users) {
+				RankListItemInfo rankListItem = new RankListItemInfo();
+				rankListItem.setScore(u.getScore().getScore());
+				rankListItem.setUsername(u.getUsername());				
+				System.out.println(rankListItem);
+				rankListItems.add(rankListItem);
+			}
+
+			return rankListItems;
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -83,5 +102,23 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean checkEmail(String email) {
 		return userDao.isEmailAvailable(email);
+	}
+
+	@Override
+	public List<RankListItemInfo> getUserWeeklyScoreList(int length,
+			int beginIndex) {
+		List<User> users = userDao.getUserWeeklyScoreList(length, beginIndex);
+		if (users != null && users.size() > 0) {
+			List<RankListItemInfo> rankListItems = new ArrayList<RankListItemInfo>();
+			for (User u : users) {
+				RankListItemInfo rankListItem = new RankListItemInfo();
+				rankListItem.setScore(u.getWeeklyScore().getScore());
+				rankListItem.setUsername(u.getUsername());
+				rankListItems.add(rankListItem);
+			}
+			return rankListItems;
+		} else {
+			return null;
+		}
 	}
 }

@@ -12,13 +12,17 @@
 	<constant name="struts.multipart.maxSize" value="10701096" />
 	<!-- 设置上传文件的临时文件夹 -->
 	<constant name="struts.multipart.saveDir" value="e:/tmp"></constant>
-	
+	<!-- 配置action由spring而不是由struts2装配 -->
+	<constant name="struts.objectFactory.spring.autoWire.alwaysRespect" value="true" />
 	
     <!-- Add packages here -->
      <package name="rsgl"  extends="struts-default">
-     
+     		<global-results>
+     			<result name="permissionerror">/WEB-INF/pages/error.jsp</result>
+     		</global-results>
      		<global-exception-mappings>
-     			<exception-mapping result="error" exception="java.lang.NoSuchFieldException"></exception-mapping>
+     			<exception-mapping result="permissionerror" exception="javax.naming.NoPermissionException"></exception-mapping>
+     			<exception-mapping result="permissionerror" exception="java.lang.NoSuchFieldException"></exception-mapping>
      		</global-exception-mappings>
      		
      		<!-- 这是获取验证码的链接 -->
@@ -59,6 +63,7 @@
      			<result name="success" type="redirectAction">success</result>
      			<result name="flagerror" type="redirectAction">error</result>
      			<result name="error" type="redirectAction">error</result>
+     			<result name="nochance" type="redirectAction">error</result>
      		</action>
      		
      		<!-- 这是指向注册页面的链接 -->
@@ -106,6 +111,12 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="getWeeklyRank" class="com.onlinejudge.action.RankAction" method="getWeeklyRank">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
 		<action name="checkUsername" class="com.onlinejudge.action.RegisterAction" method="checkUsername">
 			<result name="success" type="json">
 				<param name="root">result</param>

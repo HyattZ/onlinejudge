@@ -5,6 +5,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.struts2.interceptor.RequestAware;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
 
 import com.onlinejudge.constant.Status;
 import com.onlinejudge.domain.SubmitPageProblemInfo;
@@ -16,6 +18,8 @@ import com.onlinejudge.service.ProblemService;
  * @time 2015Äê9ÔÂ22ÈÕ
  * 
  */
+
+@Component("getSubmitFlagPageAction")
 public class GetSubmitFalgPageAaction implements RequestAware{
 	
 	private ProblemService problemService;
@@ -46,6 +50,7 @@ public class GetSubmitFalgPageAaction implements RequestAware{
 	public void setRequest(Map<String, Object> request) {
 			this.request = request;
 	}
+	
 	
 	public String getSubmitFlagPage(){
 		SubmitPageProblemInfo sfp = problemService.getSFPProblem(getProblemid());

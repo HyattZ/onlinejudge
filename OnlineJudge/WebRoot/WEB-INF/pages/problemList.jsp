@@ -1,7 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -39,14 +41,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a class="dropdown-toggle navbar-text" data-toggle="dropdown"
 								href="#"><i class="icon-user"></i>Hyatt</a>
 							<ul class="dropdown-menu">
-								<li><a href="http://localhost:8080/OnlineJudge/informationPanel">查看资料</a></li>
+								<li><a
+									href="http://localhost:8080/OnlineJudge/informationPanel">查看资料</a></li>
 								<li><a href="http://localhost:8080/OnlineJudge/logout">退出</a></li>
 							</ul>
 						</div>
 					</s:if>
 					<s:else>
 						<ul class="nav pull-right">
-							<li><a href="http://localhost:8080/OnlineJudge/loginPage" data-toggle="modal">登录</a></li>
+							<li><a href="http://localhost:8080/OnlineJudge/loginPage"
+								data-toggle="modal">登录</a></li>
 							<li class="divider-vertical"></li>
 							<li><a href="http://localhost:8080/OnlineJudge/registerPage">注册</a></li>
 						</ul>
@@ -65,22 +69,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<li class="active"><a href="#">问题列表</a></li>
 						</ul>
 						<hr>
-						<table class="table table-striped">
-							<thead>
-								<th>题目编号</th>
-								<th>题目</th>
-								<th>题目分数</th>
-							</thead>
-							<tbody>
-								<s:iterator value="#request.problemList">
-									<tr>
-										<td><s:property value="problemid" /></td>
-										<td><s:property value="problemtitle" /></td>
-										<td><s:property value="mark" /></td>
-									</tr>
-								</s:iterator>
-							</tbody>
-						</table>
+
+
+						<s:if test="#session.isLogin">
+							<table class="table table-striped">
+								<thead>
+									<th>题目编号</th>
+									<th>题目</th>
+									<th>题目分数</th>
+									<th>状态</th>
+								</thead>
+								<tbody>
+									<s:iterator value="#request.problemListItems">
+										<tr>
+											<td><s:property value="problemid" /></td>
+											<td><s:property value="problemtitle" /></td>
+											<td><s:property value="mark" /></td>
+											<td>
+												<s:if test="isComplete==1">
+													<span><i class="icon-ok"></i></span>
+												</s:if>
+												<s:elseif test="isComplete==-1">
+													<span><i class="icon-remove"></i></span>
+												</s:elseif>
+											</td>
+										</tr>
+									</s:iterator>
+								</tbody>
+							</table>
+						</s:if>
+						<s:else>
+							<table class="table table-striped">
+								<thead>
+									<th>题目编号</th>
+									<th>题目</th>
+									<th>题目分数</th>
+								</thead>
+								<tbody>
+									<s:iterator value="#request.problemListItems">
+										<tr>
+											<td><s:property value="problemid" /></td>
+											<td><s:property value="problemtitle" /></td>
+											<td><s:property value="mark" /></td>
+										</tr>
+									</s:iterator>
+								</tbody>
+							</table>
+						</s:else>
+
+
+
 
 						<div class="pagination pagination-centered">
 							<ul class="pager">

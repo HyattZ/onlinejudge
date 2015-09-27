@@ -1,5 +1,6 @@
 package com.onlinejudge.domain.database;
 
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,18 +20,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name="record")
 public class Record {
-	private int recordid;
+	private String recordid;
 	private int stuid;
 	private int problemid;
 	private String submitflag;
-	private String submittime;
+	private Timestamp submittime;
 	
 	public Record(){
 		
 	}
 	
 	@Id
-	public int getRecordid() {
+	public String getRecordid() {
 		return recordid;
 	}
 
@@ -38,11 +39,11 @@ public class Record {
 		return submitflag;
 	}
 	
-	public String getSubmittime() {
+	public Timestamp getSubmittime() {
 		return submittime;
 	}
 		
-	public void setRecordid(int recordid) {
+	public void setRecordid(String recordid) {
 		this.recordid = recordid;
 	}
 	
@@ -51,7 +52,7 @@ public class Record {
 	}
 
 
-	public void setSubmittime(String submittime) {
+	public void setSubmittime(Timestamp submittime) {
 		this.submittime = submittime;
 	}
 

@@ -1,10 +1,17 @@
 package com.onlinejudge.aop;
 
+
+import java.io.IOException;
+
+import javax.naming.NoPermissionException;
+
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
 import com.onlinejudge.annotation.AccessToUrl;
+import com.onlinejudge.constant.ThreadLocalSession;
+import com.onlinejudge.enums.IsLogin;
 
 /**
  * @author ’‘–¶ÃÏ
@@ -14,11 +21,18 @@ import com.onlinejudge.annotation.AccessToUrl;
  */
 @Aspect
 @Component
-public class AccessInterceptor {
+public class AccessInterceptor{
+
 	@Before("com.onlinejudge.aop.SystemArchitecture.accessToUrl()&&"+
 			"@annotation(accessToUrl)")
-	public void checkPermission(AccessToUrl accessToUrl){
-		System.out.println("================================");
-		System.out.println(accessToUrl.value());
+	public void checkPermission(AccessToUrl accessToUrl) throws IOException{
+		IsLogin isLogin = accessToUrl.value();
+		IsLogin sessionLogin = (IsLogin) ThreadLocalSession.getSessionLocal().getAttribute("loginStatus");
+		
+		if (!sessionLogin.equals(isLogin)){
+			ThreadLocalSession.getResponseLocal().sendRedirect("http://localhost:8080/OnlineJudge/loginPage");
+		}
 	}
+
+
 }

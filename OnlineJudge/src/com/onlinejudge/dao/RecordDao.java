@@ -4,21 +4,18 @@ import javax.annotation.Resource;
 
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
+import com.onlinejudge.domain.database.Record;
+
 /**
  * @author 赵笑天
  *
  * @time 2015年9月15日
  * 
  */
-public class RecordDao {
-	private HibernateTemplate hibernateTemplate;
+public interface RecordDao {
 
-	public HibernateTemplate getHibernateTemplate() {
-		return hibernateTemplate;
-	}
+	public abstract boolean isRecordExists(String recordid);
 	
-	@Resource
-	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-		this.hibernateTemplate = hibernateTemplate;
-	}
+	public abstract void saveRecord(Record record);
+	
 }

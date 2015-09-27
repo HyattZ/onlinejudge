@@ -15,6 +15,7 @@ import com.onlinejudge.dao.UserDao;
 import com.onlinejudge.domain.InformationPanelUserInfo;
 import com.onlinejudge.domain.database.Score;
 import com.onlinejudge.domain.database.User;
+import com.onlinejudge.domain.database.WeeklyScore;
 
 /**
  * @author ’‘–¶ÃÏ
@@ -40,7 +41,9 @@ public class UserDaoImpl implements UserDao {
 	public List<User> getUserRankList(int length,int beginIndex){
 		List<User> users = new ArrayList<User>();
 		
-		users = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery("from User u order by u.score.score desc")
+		users = hibernateTemplate.getSessionFactory()
+				.getCurrentSession()
+				.createQuery("from User u order by u.score.score desc")
 				.setMaxResults(length)
 				.setFirstResult(beginIndex).list();
 		
@@ -150,5 +153,20 @@ public class UserDaoImpl implements UserDao {
 		}else{
 			return false;
 		}
+	}
+	
+	@Override
+	public List<User> getUserWeeklyScoreList(int length, int beginIndex) {
+		List<User> users = new ArrayList<User>();
+		
+		users = hibernateTemplate.getSessionFactory()
+				.openSession()
+				.createQuery("from User u order by u.weeklyScore.score desc")
+				.setMaxResults(length)
+				.setFirstResult(beginIndex).list();
+		
+		hibernateTemplate.flush();
+		
+		return users;
 	}
 }

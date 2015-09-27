@@ -22,6 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	$(document).ready(function(e) {
         //网页准备好之后加载排行榜
 		loadRank();
+		loadWeeklyRank();
 		loadNotice();
     });
 </script>
@@ -43,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class="nav pull-right"> <a class="dropdown-toggle navbar-text" data-toggle="dropdown"
 								href="#"><i class="icon-user"></i>Hyatt</a>
             <ul class="dropdown-menu">
-              <li><a href="http://localhost:8080/OnlineJudge/infomationPanel">查看资料</a></li>
+              <li><a href="http://localhost:8080/OnlineJudge/informationPanel">查看资料</a></li>
               <li><a href="http://localhost:8080/OnlineJudge/logout">退出</a></li>
             </ul>
           </div>
@@ -100,7 +101,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             
             <div class="tab-pane" id="WeekRank">
-              <table class="table table-striped" id="rank">
+              <table class="table table-striped" id="weeklyrank">
                 
                   <th> 
                   <td>排周名</td>

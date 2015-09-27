@@ -12,11 +12,14 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
 
 import com.onlinejudge.annotation.AccessToUrl;
 import com.onlinejudge.constant.Status;
 import com.onlinejudge.domain.database.User;
 import com.onlinejudge.dto.LoginFormBean;
+import com.onlinejudge.enums.IsLogin;
 import com.onlinejudge.service.UserService;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -26,6 +29,7 @@ import com.opensymphony.xwork2.ModelDriven;
  * @time 2015Äê9ÔÂ15ÈÕ
  * 
  */
+@Component("loginAction")
 public class LoginAction implements  ServletRequestAware,SessionAware,ModelDriven{
 	private Logger logger = Logger.getLogger(LoginAction.class);
 	private HttpServletRequest request;
@@ -92,7 +96,7 @@ public class LoginAction implements  ServletRequestAware,SessionAware,ModelDrive
 		User u = userService.getUserByUsername(lfb.getUsername());
 		session.put("isLogin", true);
 		session.put("stuid", u.getStuid());
-		
+		session.put("loginStatus", IsLogin.YES);
 		return Status.SUCCESS;
 	}
 	

@@ -1,7 +1,9 @@
 package com.onlinejudge.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.onlinejudge.domain.ProblemListItem;
 import com.onlinejudge.domain.SubmitPageProblemInfo;
 import com.onlinejudge.domain.database.Problem;
 import com.onlinejudge.dto.ResultFormBean;
@@ -14,7 +16,8 @@ import com.onlinejudge.dto.ResultFormBean;
  * 
  */
 public interface ProblemService {
-	public abstract List<Problem> getProblemList(int length, int beginIndex);
+	public abstract List<ProblemListItem> getProblemList(int length, int beginIndex
+			,Map<String,Object> session);
 
 	public abstract boolean checkResult(ResultFormBean rfb);
 

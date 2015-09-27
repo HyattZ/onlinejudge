@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.onlinejudge.domain.InformationPanelUserInfo;
 import com.onlinejudge.domain.database.User;
+import com.onlinejudge.domain.database.WeeklyScore;
 
 /**
  * @author едаІЬь
@@ -28,5 +29,8 @@ public interface UserDao {
 	public abstract User getUserByUsername(String username);
 
 	public abstract boolean isEmailAvailable(String email);
+
+	public abstract List<User> getUserWeeklyScoreList(int length,
+			int beginIndex);
 
 }

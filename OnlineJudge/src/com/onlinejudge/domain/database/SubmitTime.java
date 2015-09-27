@@ -23,7 +23,7 @@ public class SubmitTime {
 	private int submittimes;
 	private Timestamp recorddate;
 	private int problemid;
-	private int submittimesid;
+	private String submittimesid;
 	
 	public SubmitTime(){
 		
@@ -38,12 +38,11 @@ public class SubmitTime {
 	}
 	
 	@Id
-	@GeneratedValue
-	public int getSubmittimesid() {
+	public String getSubmittimesid() {
 		return submittimesid;
 	}
 
-	public void setSubmittimesid(int submittimesid) {
+	public void setSubmittimesid(String submittimesid) {
 		this.submittimesid = submittimesid;
 	}
 	
@@ -68,5 +67,14 @@ public class SubmitTime {
 	public void setRecorddate(Timestamp recorddate) {
 		this.recorddate = recorddate;
 	}
+
+	@Override
+	public String toString() {
+		return "SubmitTime [stuid=" + stuid + ", submittimes=" + submittimes
+				+ ", recorddate=" + recorddate + ", problemid=" + problemid
+				+ ", submittimesid=" + getSubmittimesid() + "]";
+	}
+
+	
 	
 }

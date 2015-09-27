@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.onlinejudge.dao.UserDao;
+import com.onlinejudge.domain.database.User;
 
 /**
  * @author ’‘–¶ÃÏ
@@ -30,5 +31,14 @@ public class UserDaoImplTest {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		UserDao ud = (UserDao) context.getBean("userDaoImpl");
 		System.out.println(ud.getUserRankList(5, 0).size());
+	}
+	
+	@Test
+	public void testGetUserWeeklyScoreList(){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		UserDao ud = (UserDao) context.getBean("userDaoImpl");
+		for (User u : ud.getUserWeeklyScoreList(5, 0)){
+			System.out.println(u);
+		}
 	}
 }

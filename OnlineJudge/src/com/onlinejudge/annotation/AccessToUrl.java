@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.onlinejudge.enums.IsLogin;
+
 /**
  * @author едаІЬь
  *
@@ -14,5 +16,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface AccessToUrl {
-	boolean value();
+	IsLogin value();
 }

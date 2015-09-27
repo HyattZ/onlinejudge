@@ -4,6 +4,8 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
 
 import com.onlinejudge.constant.Status;
 
@@ -13,7 +15,9 @@ import com.onlinejudge.constant.Status;
  * @time 2015Äê9ÔÂ15ÈÕ
  * 
  */
-public class RdirectAction implements SessionAware,RequestAware{
+
+@Component("redirectAction")
+public class RedirectAction implements SessionAware,RequestAware{
 	private Map<String,Object> session;
 	private Map<String,Object> request;
 

@@ -32,6 +32,7 @@ public class User {
 	private Set<Record> records;
 	private Score score;
 	private Set<SubmitTime> submittimes;
+	private WeeklyScore weeklyScore;
 	
 	public User(){
 		
@@ -130,14 +131,24 @@ public class User {
 		this.realname = realname;
 	}
 	
+	@OneToOne
+	@JoinColumn(name="stuid")
+	public WeeklyScore getWeeklyScore() {
+		return weeklyScore;
+	}
+
+	public void setWeeklyScore(WeeklyScore weeklyScore) {
+		this.weeklyScore = weeklyScore;
+	}
 
 	@Override
 	public String toString() {
 		return "User [stuid=" + stuid + ", username=" + username
 				+ ", password=" + password + ", realname=" + realname + ", qq="
 				+ qq + ", phonenum=" + phonenum + ", email=" + email
-				+ ", faviconuri=" + faviconuri + ", records=" + records
-				+ ", score=" + score + "]";
+				+ ", faviconuri=" + faviconuri + ", score=" + score
+				+ ", submittimes=" + submittimes + ", weeklyScore="
+				+ weeklyScore + "]";
 	}
 
 

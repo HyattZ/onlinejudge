@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
+import org.springframework.stereotype.Component;
 
 import com.onlinejudge.constant.Status;
 import com.opensymphony.xwork2.ActionSupport;
@@ -18,6 +19,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * @time 2015Äê9ÔÂ15ÈÕ
  * 
  */
+@Component("authcodeAction")
 public class AuthCodeAction extends ActionSupport{
 
 	private static final long serialVersionUID = -427219907570705189L;

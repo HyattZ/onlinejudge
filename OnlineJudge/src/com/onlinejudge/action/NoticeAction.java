@@ -2,6 +2,7 @@ package com.onlinejudge.action;
 
 import javax.annotation.Resource;
 
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
 import net.sf.json.JSONObject;
@@ -9,6 +10,7 @@ import net.sf.json.JSONObject;
 import com.onlinejudge.annotation.AccessToUrl;
 import com.onlinejudge.constant.Status;
 import com.onlinejudge.domain.database.Notice;
+import com.onlinejudge.enums.IsLogin;
 import com.onlinejudge.service.NoticeService;
 
 /**
@@ -17,7 +19,7 @@ import com.onlinejudge.service.NoticeService;
  * @time 2015Äê9ÔÂ18ÈÕ
  * 
  */
-@Component
+@Component("noticeAction")
 public class NoticeAction {
 	private String result;
 	private NoticeService noticeService;
@@ -36,12 +38,17 @@ public class NoticeAction {
 	public void setNoticeService(NoticeService noticeService) {
 		this.noticeService = noticeService;
 	}
-	
+
 	public String getLastestNotice(){
-		Notice notice = noticeService.getLastestNotice();
-		JSONObject json = new JSONObject();
-		json.put("notice", notice);
-		result = json.toString();
-		return Status.SUCCESS;
+		try{
+			Notice notice = noticeService.getLastestNotice();
+			JSONObject json = new JSONObject();
+			json.put("notice", notice);
+			result = json.toString();
+			return Status.SUCCESS;
+		}catch(Exception e){
+			e.printStackTrace();
+			return Status.FAIL;
+		}
 	}
 }

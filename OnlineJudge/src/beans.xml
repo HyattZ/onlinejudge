@@ -17,6 +17,8 @@
   
   <aop:aspectj-autoproxy />
   
+  <aop:config proxy-target-class="true"></aop:config>
+  
   <!-- 配置数据源 -->
  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
   
@@ -65,13 +67,15 @@
 	
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
-			<tx:method name="get*" read-only="true"/>
+			<tx:method name="get*" propagation="REQUIRED"/>
 			<tx:method name="save*" propagation="REQUIRED"/>
 			<tx:method name="update*" propagation="REQUIRED"/>
 			<tx:method name="delete*" propagation="REQUIRED"/>
 			<tx:method name="register*" propagation="REQUIRED"/>
-			<tx:method name="employeeSubmitFile" propagation="REQUIRED"/>
+			<tx:method name="add*"  propagation="REQUIRED"/>
+			<tx:method name="sub*"  propagation="REQUIRED"/>
 			<tx:method name="del*" propagation="REQUIRED"/>
+			<tx:method name="check*" propagation="REQUIRED"/>
 		</tx:attributes>
 	</tx:advice>
 	

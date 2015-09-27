@@ -7,12 +7,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
 
+import com.onlinejudge.annotation.AccessToUrl;
 import com.onlinejudge.constant.Status;
+import com.onlinejudge.enums.IsLogin;
 import com.onlinejudge.tool.UploadService;
 
 /**
@@ -21,6 +27,8 @@ import com.onlinejudge.tool.UploadService;
  * @time 2015年9月16日
  * 
  */
+
+@Component("uploadAction")
 public class UploadAction {
 	private Logger logger = Logger.getLogger(UploadAction.class);
 	//上传文件
@@ -65,6 +73,7 @@ public class UploadAction {
 		this.savePath = savePath;
 	}
 	
+	@AccessToUrl(IsLogin.YES)
 	public String uploadFile(){
 		UploadService us = new UploadService();
 		String uri = us.saveUploadFile(savePath, imageFileName, image);

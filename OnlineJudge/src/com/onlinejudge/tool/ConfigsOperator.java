@@ -36,15 +36,15 @@ public class ConfigsOperator {
 	
 	public void saveProperties(String key,String value) throws IOException{
 		Properties properties = new Properties();
-/*		File file = new File(this.getClass().getResource("/").getPath()+"/configs.properties");
+		File file = new File(this.getClass().getResource("/").getPath()+"/configs.properties");
 		FileInputStream fileInputStream = new FileInputStream(file);
 		properties.load(fileInputStream);
 		if (fileInputStream!=null){
 			fileInputStream.close();
-		}*/
-		OutputStream os = new FileOutputStream("F:\\"
+		}
+		OutputStream os = new FileOutputStream(this.getClass().getResource("/").getPath()
 				+ "configs.properties");
-		properties.setProperty("ssss", "ddsfasdfasf");
+		properties.setProperty(key, value);
 		properties.store(os, null);
 		
 		if (os!=null){

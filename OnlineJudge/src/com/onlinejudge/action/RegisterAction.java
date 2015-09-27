@@ -8,6 +8,8 @@ import javax.annotation.Resource;
 import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
 
 import com.onlinejudge.constant.Status;
 import com.onlinejudge.domain.database.User;
@@ -22,6 +24,8 @@ import com.opensymphony.xwork2.ModelDriven;
  * @time 2015Äê9ÔÂ16ÈÕ
  * 
  */
+
+@Component("registerAction")
 public class RegisterAction implements ModelDriven{
 	private Logger logger = Logger.getLogger(RegisterAction.class);
 	private RegisterFormBean rfb;

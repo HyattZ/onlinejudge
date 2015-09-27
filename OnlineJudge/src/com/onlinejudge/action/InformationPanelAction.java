@@ -5,9 +5,14 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.struts2.interceptor.RequestAware;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
 
+import com.onlinejudge.annotation.AccessToUrl;
 import com.onlinejudge.constant.Status;
 import com.onlinejudge.domain.InformationPanelUserInfo;
+import com.onlinejudge.enums.IsLogin;
+import com.onlinejudge.exception.NoPermissionException;
 import com.onlinejudge.service.UserService;
 
 /**
@@ -16,6 +21,7 @@ import com.onlinejudge.service.UserService;
  * @time 2015Äê9ÔÂ22ÈÕ
  * 
  */
+@Component("informationPanelAction")
 public class InformationPanelAction implements RequestAware{
 	private Map<String ,Object> request;
 	private UserService userService;
@@ -34,9 +40,9 @@ public class InformationPanelAction implements RequestAware{
 		this.request = request;
 	}
 	
+	@AccessToUrl(IsLogin.YES)
 	public String getUserInformation(){
 		InformationPanelUserInfo ipui = userService.getIPUserInformation(130420206);
-		System.out.println(ipui);
 		request.put("ipui", ipui);
 		return Status.SUCCESS;
 	}
