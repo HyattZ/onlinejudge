@@ -33,4 +33,15 @@ public interface UserDao {
 	public abstract List<User> getUserWeeklyScoreList(int length,
 			int beginIndex);
 
+	public abstract User getUserByEmail(String email);
+	
+	public abstract String getPasswordByEmail(String email);
+
+	public abstract boolean updateUser(User u);
+
+	public abstract int getUserScoreCount();
+
+	public abstract int getUseWeeklyrScoreCount();
+
+
 }

@@ -43,6 +43,12 @@ public class ScoreDaoImpl implements ScoreDao{
 		hibernateTemplate.flush();
 	}
 
+	@Override
+	public void save(Score score) {
+		hibernateTemplate.save(score);
+		hibernateTemplate.flush();	
+	}
+
 
 
 }

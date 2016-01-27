@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -29,6 +30,7 @@ public class Notice {
 		return noticecontent;
 	}
 	@Id
+	@GeneratedValue
 	public int getNoticeid() {
 		return noticeid;
 	}

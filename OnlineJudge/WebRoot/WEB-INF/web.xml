@@ -4,18 +4,15 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  
   <listener>
-  	<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
   </listener>
-  
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
- 
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:beans.xml</param-value>
+    <param-value>/WEB-INF/classes/beans.xml</param-value>
   </context-param>
   <filter>
     <display-name>SessionInitializer</display-name>
@@ -73,5 +70,25 @@
   <servlet-mapping>
     <servlet-name>getFavicon</servlet-name>
     <url-pattern>/getFavicon.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UploadServlet</display-name>
+    <servlet-name>UploadServlet</servlet-name>
+    <servlet-class>com.onlinejudge.servlet.UploadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadServlet</servlet-name>
+    <url-pattern>/UploadServlet.html</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetPDF</display-name>
+    <servlet-name>GetPDF</servlet-name>
+    <servlet-class>com.onlinejudge.servlet.GetPDF</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetPDF</servlet-name>
+    <url-pattern>/GetPDF.html</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -30,7 +30,7 @@ public class AccessInterceptor{
 		IsLogin sessionLogin = (IsLogin) ThreadLocalSession.getSessionLocal().getAttribute("loginStatus");
 		
 		if (!sessionLogin.equals(isLogin)){
-			ThreadLocalSession.getResponseLocal().sendRedirect("http://localhost:8080/OnlineJudge/loginPage");
+			ThreadLocalSession.getResponseLocal().sendRedirect("loginPage");
 		}
 	}
 

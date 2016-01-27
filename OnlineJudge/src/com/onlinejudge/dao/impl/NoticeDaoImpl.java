@@ -1,7 +1,10 @@
 package com.onlinejudge.dao.impl;
 
+import java.math.BigInteger;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.persistence.Entity;
@@ -42,5 +45,41 @@ public class NoticeDaoImpl implements NoticeDao {
 		.createQuery("from Notice n where n.posttime ='"+time+"'").list().get(0);
 		
 		return notice;
+	}
+
+	@Override
+	public boolean saveNotice(Notice notice) {
+		try{
+			hibernateTemplate.save(notice);
+			hibernateTemplate.flush();
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+
+	@Override
+	public List<Notice> getNoticeList(int beginIndex, int length) {
+		List<Notice> notices = new ArrayList<Notice>();
+		notices = hibernateTemplate.getSessionFactory()
+				.getCurrentSession()
+				.createQuery("from Notice order by posttime desc")
+				.setMaxResults(length)
+				.setFirstResult(beginIndex).list();
+		if (notices != null && notices.size() > 0){
+			return notices;
+		}else{
+			return null;
+		}
+	}
+
+	@Override
+	public int getNoticeCount() {
+		BigInteger count = (BigInteger) hibernateTemplate
+				.getSessionFactory()
+				.getCurrentSession()
+				.createSQLQuery("select count(*) from Notice")
+				.uniqueResult();
+		return count.intValue();
 	}
 }

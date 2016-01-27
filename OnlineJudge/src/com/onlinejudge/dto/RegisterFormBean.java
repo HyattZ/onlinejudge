@@ -18,6 +18,8 @@ public class RegisterFormBean {
 	private String passwordAgain;
 	private String email;
 	private String authCode;
+	private String qq;
+	private String phonenum;
 	
 	public int getStuid() {
 		return stuid;
@@ -84,7 +86,11 @@ public class RegisterFormBean {
 		}
 		
 	}
-
+	
+	public boolean validateAuthCode(String authCode){
+		return authCode.equalsIgnoreCase(this.authCode);
+	}
+	
 	public boolean validateRealName() {
 		String regex = "^[\u4e00-\u9fa5]{2,}$";
 		if (this.realname.matches(regex)){
@@ -102,7 +108,25 @@ public class RegisterFormBean {
 			return false;
 		}
 	}
-
+	
+	public boolean validateQQ(){
+		String regex = "^[1-9][0-9]{4,9}$";
+		if (this.qq.matches(regex)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public boolean validatePhonenum(){
+		String regex = "^1\\d{10}$";
+		if (this.phonenum.matches(regex)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	public boolean validateStuid() {
 		if (this.stuid != -1){
 			return true;
@@ -112,19 +136,35 @@ public class RegisterFormBean {
 	}
 
 	public boolean validateUserName() {
-		String regex = "^[a-zA-Z]\\w{5,24}$";
-		if (this.username.matches(regex)){
+		String regex = "^[\u4e00-\u9fa5_a-zA-Z0-9]+$";
+		if (this.username.matches(regex) && username.length() < 35 && username.length() > 0){
 			return true;
 		}else{
 			return false;
 		}
 	}
-
+	public String getQq() {
+		return qq;
+	}
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+	public String getPhonenum() {
+		return phonenum;
+	}
+	public void setPhonenum(String phonenum) {
+		this.phonenum = phonenum;
+	}
+	public void setStuid(int stuid) {
+		this.stuid = stuid;
+	}
+	
 	@Override
 	public String toString() {
-		return "RegisterFormBean [stuid=" + stuid + ", username="
-				+ username + ", realname=" + realname + ", password="
-				+ password + ", passwordAgain=" + passwordAgain + ", email="
-				+ email + ", authCode=" + authCode + "]";
+		return "RegisterFormBean [stuid=" + stuid + ", username=" + username
+				+ ", realname=" + realname + ", password=" + password
+				+ ", passwordAgain=" + passwordAgain + ", email=" + email
+				+ ", authCode=" + authCode + ", qq=" + qq + ", phonenum="
+				+ phonenum + "]";
 	}
 }

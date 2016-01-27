@@ -1,9 +1,11 @@
 package com.onlinejudge.dao.impl;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.swing.text.Position.Bias;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -56,6 +58,7 @@ public class UserDaoImpl implements UserDao {
 	public boolean saveUser(User u){
 		try{
 			hibernateTemplate.save(u);
+			hibernateTemplate.flush();
 			return true;
 		}catch(Exception e){
 			logger.error("数据库出错:"+e.getMessage()+"!"+u+"未存入数据库！");
@@ -108,7 +111,7 @@ public class UserDaoImpl implements UserDao {
 				.getCurrentSession()
 				.createSQLQuery("select stuid,username,realname,qq,phonenum,email,faviconuri from User where stuid="+stuid)
 				.list();
-		System.out.println(list.size());
+		//System.out.println(list.size());
 		if (list == null || list.size() ==0){
 			return null;
 		}else{
@@ -160,7 +163,7 @@ public class UserDaoImpl implements UserDao {
 		List<User> users = new ArrayList<User>();
 		
 		users = hibernateTemplate.getSessionFactory()
-				.openSession()
+				.getCurrentSession()
 				.createQuery("from User u order by u.weeklyScore.score desc")
 				.setMaxResults(length)
 				.setFirstResult(beginIndex).list();
@@ -169,4 +172,59 @@ public class UserDaoImpl implements UserDao {
 		
 		return users;
 	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		List list =hibernateTemplate.getSessionFactory()
+				.getCurrentSession()
+				.createQuery("from User where email='"+email+"'")
+				.list();
+		if (list == null || list.size() == 0){
+			return null;
+		}else{
+			User u = new User();
+			u =(User) list.get(0);
+			return u;
+		}
+	}
+	
+	@Override
+	public String getPasswordByEmail(String email) {
+		return (String) hibernateTemplate.getSessionFactory()
+				.getCurrentSession()
+				.createSQLQuery("select u.password from User u where u.email='"+email+"'")
+				.list().get(0);
+	}
+
+	@Override
+	public boolean updateUser(User u) {
+		try{
+			hibernateTemplate.update(u);
+			hibernateTemplate.flush();
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+
+	@Override
+	public int getUserScoreCount() {
+		BigInteger count = (BigInteger) hibernateTemplate
+				.getSessionFactory()
+				.getCurrentSession()
+				.createSQLQuery("select count(*) from Score")
+				.uniqueResult();
+		return count.intValue();
+	}
+
+	@Override
+	public int getUseWeeklyrScoreCount() {
+		BigInteger count = (BigInteger) hibernateTemplate
+				.getSessionFactory()
+				.getCurrentSession()
+				.createSQLQuery("select count(*) from WeeklyScore")
+				.uniqueResult();
+		return count.intValue();
+	}
+
 }

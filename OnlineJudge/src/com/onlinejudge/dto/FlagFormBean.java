@@ -32,4 +32,9 @@ public class FlagFormBean {
 	public boolean validateFlag(){
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "FlagFormBean [problemid=" + problemid + ", flag=" + flag + "]";
+	}
 }

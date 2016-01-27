@@ -8,11 +8,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
 
 import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.ServletRequestAware;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
@@ -29,8 +34,9 @@ import com.onlinejudge.tool.UploadService;
  */
 
 @Component("uploadAction")
-public class UploadAction {
+public class UploadAction implements ServletRequestAware{
 	private Logger logger = Logger.getLogger(UploadAction.class);
+	private HttpServletRequest request;
 	//上传文件
 	private File image;
 	//封装上传文件类型的属性
@@ -39,8 +45,12 @@ public class UploadAction {
 	private String imageFileName;
 	//上传文件物理路径
 	private String savePath;
-	
 	private String result;
+	
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
+	}
 	
 	public String getResult() {
 		return result;
@@ -73,9 +83,10 @@ public class UploadAction {
 		this.savePath = savePath;
 	}
 	
-	@AccessToUrl(IsLogin.YES)
+	/*@AccessToUrl(IsLogin.YES)*/
 	public String uploadFile(){
 		UploadService us = new UploadService();
+		savePath = request.getSession().getServletContext().getRealPath("/")+"WEB-INF\\answers";
 		String uri = us.saveUploadFile(savePath, imageFileName, image);
 		System.out.println(uri);
 		Map<String,String> map = new HashMap<String,String>();
@@ -85,6 +96,5 @@ public class UploadAction {
 		setResult(json.toString());
 		return Status.SUCCESS;
 	}
-
 }
 

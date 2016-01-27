@@ -30,31 +30,37 @@
 		<div class="navbar navbar-static-top">
 			<div class="navbar-inner">
 				<div class="container">
-					<a class="brand" href="http://localhost:8080/OnlineJudge/">HITWH-CTF</a>
+					<a class="brand" href="<%=basePath%>">在线答题</a>
 					<ul class="nav">
-						<li><a href="http://localhost:8080/OnlineJudge/">首页</a></li>
-						<li><a href="http://localhost:8080/OnlineJudge/problemList">题目</a></li>
-						<li><a href="http://localhost:8080/OnlineJudge/showAnswers">答案公布</a></li>
+						<li><a href="<%=basePath%>">首页</a></li>
+						<li><a href="<%=basePath%>problemList">题目</a></li>
+						<li><a href="<%=basePath%>showAnswers">答案公布</a></li>
+						<s:if test="#session.isLogin">
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">我的分数<span class="caret"></span></a>
+                        	<ul class="dropdown-menu">
+                            	<li><a href="javascript:void(0)">总分:<s:property value="#session.score"/></a></li>
+                                <li><a href="javascript:void(0)">周总分:<s:property value="#session.weeklyScore"/></a></li>
+                            </ul>
+                        </li>
+                        </s:if>
 					</ul>
 					<s:if test="#session.isLogin">
-						<div class="nav pull-right">
+						<div class="nav pull-right">						
 							<a class="dropdown-toggle navbar-text" data-toggle="dropdown"
-								href="#"><i class="icon-user"></i>Hyatt</a>
+								href="#"><i class="icon-user"></i>
+							<s:property value="#session.username" /></a>
 							<ul class="dropdown-menu">
-								<li><a
-									href="http://localhost:8080/OnlineJudge/informationPanel">查看资料</a></li>
-								<li><a href="http://localhost:8080/OnlineJudge/logout">退出</a></li>
+								<li><a href="<%=basePath%>informationPanel">查看资料</a></li>
+								<li><a href="<%=basePath%>logout">退出</a></li>
 							</ul>
 						</div>
 					</s:if>
 					<s:else>
 						<ul class="nav pull-right">
-							<li><a href="http://localhost:8080/OnlineJudge/loginPage"
-								data-toggle="modal">登录</a></li>
+							<li><a href="<%=basePath%>loginPage">登录</a></li>
 							<li class="divider-vertical"></li>
-							<li><a href="http://localhost:8080/OnlineJudge/registerPage">注册</a></li>
+							<li><a href="<%=basePath%>registerPage">注册</a></li>
 						</ul>
-
 					</s:else>
 				</div>
 			</div>
@@ -78,12 +84,13 @@
 									<th>题目</th>
 									<th>题目分数</th>
 									<th>状态</th>
+									<th>剩余次数</th>
 								</thead>
 								<tbody>
 									<s:iterator value="#request.problemListItems">
 										<tr>
 											<td><s:property value="problemid" /></td>
-											<td><s:property value="problemtitle" /></td>
+											<td><a class="navbar-link" href="<%=basePath%>submitFlagPage?problemid=<s:property value="problemid" />"><s:property value="problemtitle" /></a></td>
 											<td><s:property value="mark" /></td>
 											<td>
 												<s:if test="isComplete==1">
@@ -92,6 +99,14 @@
 												<s:elseif test="isComplete==-1">
 													<span><i class="icon-remove"></i></span>
 												</s:elseif>
+											</td>
+											<td>
+												<s:if test="submitTimes==-1">
+													<span>-</span>
+												</s:if>
+												<s:else>
+													<span><s:property value="submitTimes" /></span>
+												</s:else>
 											</td>
 										</tr>
 									</s:iterator>
@@ -109,7 +124,7 @@
 									<s:iterator value="#request.problemListItems">
 										<tr>
 											<td><s:property value="problemid" /></td>
-											<td><s:property value="problemtitle" /></td>
+											<td><a class="navbar-link" href="<%=basePath%>submitFlagPage?problemid=<s:property value="problemid" />"><s:property value="problemtitle" /></a></td>
 											<td><s:property value="mark" /></td>
 										</tr>
 									</s:iterator>
@@ -118,12 +133,10 @@
 						</s:else>
 
 
-
-
-						<div class="pagination pagination-centered">
+						<%-- <div class="pagination pagination-centered">
 							<ul class="pager">
 								<li><a
-									href="http://localhost:8080/OnlineJudge/problemList?problemPage=${param.problemPage-1}">
+									href="<%=basePath%>problemList?problemPage=${param.problemPage-1}">
 										前一页 </a></li>
 							</ul>
 							<ul>
@@ -132,16 +145,16 @@
 									begin="${requestScope.beginIndex}"
 									end="${requestScope.endIndex}">
 									<li><a
-										href="http://localhost:8080/OnlineJudge/problemList?problemPage=${status.index}">${status.index}</a></li>
+										href="<%=basePath%>problemList?problemPage=${status.index}">${status.index}</a></li>
 								</c:forEach>
 
 							</ul>
 							<ul class="pager">
 								<li><a
-									href="http://localhost:8080/OnlineJudge/problemList?problemPage=${param.problemPage+1}">后一页</a></li>
+									href="<%=basePath%>problemList?problemPage=${param.problemPage+1}">后一页</a></li>
 							</ul>
 						</div>
-
+ --%>
 						<hr>
 					</div>
 				</div>

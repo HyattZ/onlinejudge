@@ -7,6 +7,8 @@ import com.onlinejudge.domain.InformationPanelUserInfo;
 import com.onlinejudge.domain.RankListItemInfo;
 import com.onlinejudge.domain.database.User;
 import com.onlinejudge.domain.database.WeeklyScore;
+import com.onlinejudge.dto.UpdatePasswordFormBean;
+import com.onlinejudge.dto.UpdateUserFormBean;
 
 /**
  * @author ’‘–¶ÃÏ
@@ -35,5 +37,19 @@ public interface UserService{
 	public abstract boolean checkEmail(String email);
 	
 	public abstract List<RankListItemInfo> getUserWeeklyScoreList(int length, int beginIndex);
+	
+	public abstract User init(User u);
+
+	public abstract User getUserByEmail(String email);
+	
+	public abstract String getPasswordByEmail(String email);
+
+	public abstract boolean updateUser(UpdateUserFormBean uufb,String email);
+	
+	public abstract boolean updateUser(UpdatePasswordFormBean upfb, String email);
+	
+	public abstract int getUserScoreCount();
+
+	public abstract int getUserWeeklyScoreCount();
 
 }

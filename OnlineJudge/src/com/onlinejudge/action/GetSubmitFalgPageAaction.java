@@ -8,8 +8,10 @@ import org.apache.struts2.interceptor.RequestAware;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
+import com.onlinejudge.annotation.AccessToUrl;
 import com.onlinejudge.constant.Status;
 import com.onlinejudge.domain.SubmitPageProblemInfo;
+import com.onlinejudge.enums.IsLogin;
 import com.onlinejudge.service.ProblemService;
 
 /**
@@ -51,7 +53,7 @@ public class GetSubmitFalgPageAaction implements RequestAware{
 			this.request = request;
 	}
 	
-	
+	@AccessToUrl(IsLogin.YES)
 	public String getSubmitFlagPage(){
 		SubmitPageProblemInfo sfp = problemService.getSFPProblem(getProblemid());
 		request.put("sfp", sfp);

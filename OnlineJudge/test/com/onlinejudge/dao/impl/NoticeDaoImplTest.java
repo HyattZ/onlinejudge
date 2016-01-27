@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.onlinejudge.dao.NoticeDao;
+import com.onlinejudge.domain.database.Notice;
 
 /**
  * @author ’‘–¶ÃÏ
@@ -24,5 +25,21 @@ public class NoticeDaoImplTest {
 		NoticeDao nd = (NoticeDao) context.getBean("noticeDaoImpl");
 		System.out.println(nd.getLastestNotice());
 	}
-
+	
+	@Test
+	public void testGetNoticeCount() {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		NoticeDao nd = (NoticeDao) context.getBean("noticeDaoImpl");
+		System.out.println(nd.getNoticeCount());
+	}
+	
+	@Test
+	public void testGetNoticeList() {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		NoticeDao nd = (NoticeDao) context.getBean("noticeDaoImpl");
+		
+		for (Notice notice:nd.getNoticeList(0, 10)){
+			System.out.println(notice);
+		}
+	}
 }

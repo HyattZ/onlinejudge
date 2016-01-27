@@ -31,6 +31,8 @@ public class ConfigsReaderTest {
 		String recordWeek = operator.getProperties("recordWeek");
 		Calendar cal = Calendar.getInstance();
 		String currentWeek = cal.get(Calendar.YEAR)+"-"+cal.get(Calendar.WEEK_OF_YEAR);
+		System.out.println(currentWeek+"=========="+recordWeek);
+		System.out.println(currentWeek.equals(recordWeek));
 		if (!currentWeek.equals(recordWeek)){
 			operator.saveProperties("recordWeek",currentWeek);
 			System.out.println("false");

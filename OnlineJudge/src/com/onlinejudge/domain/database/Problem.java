@@ -3,6 +3,7 @@ package com.onlinejudge.domain.database;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -25,12 +26,12 @@ public class Problem {
 	private Set<Record> records;
 	private String problemcontent;
 	private Set<SubmitTime> submittimes;
+	private int round;
 	
 	public Problem(){
 		
 	}
-	
-	
+		
 	public String getProblemcontent() {
 		return problemcontent;
 	}
@@ -47,6 +48,7 @@ public class Problem {
 		return mark;
 	}
 	@Id
+	@GeneratedValue
 	public int getProblemid() {
 		return problemid;
 	}
@@ -92,6 +94,15 @@ public class Problem {
 	public void setProblemtitle(String problemtitle) {
 		this.problemtitle = problemtitle;
 	}
+
+	public int getRound() {
+		return round;
+	}
+	
+	public void setRound(int round) {
+		this.round = round;
+	}
+
 
 	@Override
 	public String toString() {

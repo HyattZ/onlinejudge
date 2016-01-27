@@ -41,4 +41,12 @@ public class UserDaoImplTest {
 			System.out.println(u);
 		}
 	}
+	
+	@Test
+	public void testGetUserCount(){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		UserDao ud = (UserDao) context.getBean("userDaoImpl");
+		System.out.println(ud.getUserScoreCount());
+		System.out.println(ud.getUseWeeklyrScoreCount());
+	}
 }

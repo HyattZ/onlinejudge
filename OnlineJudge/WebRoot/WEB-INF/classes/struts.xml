@@ -17,9 +17,9 @@
 	
     <!-- Add packages here -->
      <package name="rsgl"  extends="struts-default">
-     		<global-results>
+<!--      		<global-results>
      			<result name="permissionerror">/WEB-INF/pages/error.jsp</result>
-     		</global-results>
+     		</global-results> -->
      		<global-exception-mappings>
      			<exception-mapping result="permissionerror" exception="javax.naming.NoPermissionException"></exception-mapping>
      			<exception-mapping result="permissionerror" exception="java.lang.NoSuchFieldException"></exception-mapping>
@@ -35,14 +35,35 @@
      				<result name="success">/getFavicon.html</result>
      		</action>
      		
+     		<!-- 这是获取到管理员登录的链接 -->
+     		<action name="ee7b6d592f129e9b9f7d78602ffa1e25">
+     				<result name="success">/WEB-INF/pages/adminLogin.jsp</result>
+     		</action>
+     		
+     		<!-- 处理admin登录 -->
+     		<action name="adminLogin" class="com.onlinejudge.action.AdminLoginAction" method="checkAdminLogin">
+     				<result name="success" type="redirectAction">59407253722c2cd85880178783e86fe8</result>
+     				<result name="fail" type="redirectAction">error</result>
+     		</action>
+     		
      		<!-- 这是登出的操作 -->
      		<action name="logout" class="com.onlinejudge.action.LogoutAction" method="logout">
      				<result name="success"  type="redirectAction">main</result>
      		</action>		
      		
+     		<action name="testUpload" class="com.onlinejudge.action.TestUploadAction" method="upload">
+     			<result name="success">/WEB-INF/pages/success.jsp</result>
+     			<result name="fail" type="redirectAction">error</result>
+     		</action>	
+     		
      		<!-- 这是指向登录页面的链接 -->
      		<action name="loginPage">
      			<result name="success">/WEB-INF/pages/login.jsp</result>
+     			
+     		</action>
+     		
+     		<action name="59407253722c2cd85880178783e86fe8" class="com.onlinejudge.action.AdminLoginAction" method="getManagePage">
+     			<result name="success">/WEB-INF/pages/manage.jsp</result>
      		</action>
      		<!-- 这是指向主页面的链接 -->
      		<action name="main">
@@ -52,6 +73,21 @@
       		<!-- 这是指向登录页面的链接 -->
      		<action name="informationPanel" class="com.onlinejudge.action.InformationPanelAction" method="getUserInformation">
      			<result name="success">/WEB-INF/pages/InformationPanel.jsp</result>
+     		</action>
+     		
+     		<!-- 这是显示答案的页面 -->
+     		<action name="showAnswer"  class="com.onlinejudge.action.AnswersAction" method="showAnswer">
+     			<result name="success">/WEB-INF/pages/showAnswer.jsp</result>
+     		</action>
+     		
+     		<!-- 这是获取答案PDF的连接 -->
+     		<action name="getPDF" class="com.onlinejudge.action.GetPDFAction" method="getPDF" >
+     			<result name="success">/GetPDF.html</result>
+     		</action>
+     		
+     		<!-- 这是到达更新信息页面的连接 -->
+     		<action name="updateInformationPage"  class="com.onlinejudge.action.UpdateUserInfoAction" method="updateUserInfoPage">
+     			<result name="success">/WEB-INF/pages/updateInformation.jsp</result>
      		</action>
      		
     		<!-- 这是指向提交flag的链接 -->
@@ -77,31 +113,38 @@
      			<result name="authcodeerror" type="redirectAction">error</result>
      			<result name="passworderror" type="redirectAction">error</result>
      			<result name= "usernameillegal" type="redirectAction">error</result>
+     			<result name="fail" type="redirectAction">error</result>
      		</action>
      		
      		<!-- 这是指向主界面的操作 -->
-     		<action name="problemList" class="com.onlinejudge.action.ProblemListAction" method="getMainPage">
-     			<result name="success">/WEB-INF/pages/problemList.jsp</result>
+     		<action name="problemList" class="com.onlinejudge.action.ProblemListAction" method="getProblemList">
+     			<result name="success" >/WEB-INF/pages/problemList.jsp</result>
      		</action>
      		
      		<!-- 这是指向错误页面的操作 -->
-     		<action name="error" class="com.onlinejudge.action.RdirectAction" method="TransErrorMessage">
+     		<action name="error" class="redirectAction" method="TransErrorMessage">
      			<result name="success">/WEB-INF/pages/error.jsp</result>
      		</action>
      		
      		<!-- 这是指向成功页面的操作 -->
-     		<action name="success" class="com.onlinejudge.action.RdirectAction" method="TransSuccessMessage">
+     		<action name="success" class="redirectAction" method="TransSuccessMessage">
      			<result name="success">/WEB-INF/pages/success.jsp</result>
      		</action>
      		
      		<!-- 这是展示答案列表的链接 -->
-     		<action name="showAnswers">
+     		<action name="showAnswers" class="com.onlinejudge.action.AnswersAction" method="showAnswers">
      			<result name="success">/WEB-INF/pages/showAnswers.jsp</result>
+     		</action>
+     		
+     		<action name="showNotices">
+     			<result name="success">/WEB-INF/pages/showNotices.jsp</result>
      		</action>
      		
      		<!-- 这是注册的链接 -->
      		<action name="register" class="com.onlinejudge.action.RegisterAction"  method="register">
      			<result name="success"  type="redirectAction">success</result>
+     			<result name="fail"  type="redirectAction">error</result>
+     			<result name="paramsilegal"  type="redirectAction">error</result>
      		</action>
     </package>
     
@@ -117,6 +160,54 @@
 			</result>
 		</action>
 		
+		<!-- 这是添加problem的操作 -->
+     		<action name="addProblem" class="com.onlinejudge.action.ProblemAction" method="addProblem">
+     			<result name="success"  type="json">
+     				<param name="root">result</param>
+     			</result>
+     			<result name="fail"  type="json">
+     				<param name="root">result</param>
+				</result>
+     		</action>
+     		
+     		<action name="addNotice" class="com.onlinejudge.action.NoticeAction" method="addNotice">
+     			<result name="success"  type="json">
+     				<param name="root">result</param>
+     			</result>
+     		</action>
+     		
+     		<!-- 更新用户信息的连接 -->
+     		<action name="updateUserInfo"  class="com.onlinejudge.action.UpdateUserInfoAction" method="updateUserInfo">
+     			<result name="success" type="json">
+     				<param name="root">result</param>
+     			</result>
+     			<result name="fail" type="json">
+     				<param name="root">result</param>
+     			</result>
+     			<result name="paramsilegal" type="json">
+     				<param name="root">result</param>
+     			</result>
+     		</action>
+     		
+     		<!-- 更新密码的连接 -->
+     		<action name="updatePassword"  class="com.onlinejudge.action.UpdatePasswordAction" method="updatePassword">
+     			<result name="success" type="json">
+     				<param name="root">result</param>
+     			</result>
+     			<result name="fail" type="json">
+     				<param name="root">result</param>
+     			</result>
+     			<result name="paramsilegal" type="json">
+     				<param name="root">result</param>
+     			</result>
+     		</action>
+     		
+     		<action name="setRound" class="com.onlinejudge.action.RoundAction" method="setRound">
+     				<result name="success" type="json">
+     					<param name="root">result</param>
+     				</result>	
+     		</action>
+			
 		<action name="checkUsername" class="com.onlinejudge.action.RegisterAction" method="checkUsername">
 			<result name="success" type="json">
 				<param name="root">result</param>
@@ -144,13 +235,21 @@
 			</result>
 		</action>
 		
+		<action name="getNoticeList" class="com.onlinejudge.action.NoticeAction" method="getNoticeList">
+			<result name="success" type="json">
+				<param name="root">result</param>
+			</result>
+			<result name="fail" type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
 		<!-- 这是文件上传的操作 -->
      		<action name="upload" class="com.onlinejudge.action.UploadAction" method="uploadFile">
-     			<param name="savePath">e:/images</param>
      			<result name="success" type="json">result</result>
      			<interceptor-ref name="fileUpload">
      				<!-- 过滤上传文件的类型 -->
-     				<param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg</param>
+<!--      				<param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg</param> -->
      				<!-- 上传文件的大小限制 -->
      				<param name="maximumSize">1025956</param>
      			</interceptor-ref>

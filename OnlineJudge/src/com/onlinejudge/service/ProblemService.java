@@ -3,9 +3,11 @@ package com.onlinejudge.service;
 import java.util.List;
 import java.util.Map;
 
+import com.onlinejudge.domain.ProblemAnswerPageInfo;
 import com.onlinejudge.domain.ProblemListItem;
 import com.onlinejudge.domain.SubmitPageProblemInfo;
 import com.onlinejudge.domain.database.Problem;
+import com.onlinejudge.dto.ProblemFormBean;
 import com.onlinejudge.dto.ResultFormBean;
 
 
@@ -28,4 +30,12 @@ public interface ProblemService {
 	public abstract String getFlagByProblemid(int problemid);
 
 	public abstract Problem getProblemByProblemid(int problemid);
+
+	public abstract boolean addProblem(ProblemFormBean problemFormBean);
+	
+	public abstract int getWeekNum();
+
+	public abstract List<ProblemAnswerPageInfo> getProblemIdsByWeek(int week);
+
+	public abstract List<ProblemListItem> getProblemListByRound(int currentRound,Map<String,Object> session);
 }

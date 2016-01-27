@@ -48,11 +48,15 @@ public class RedirectAction implements SessionAware,RequestAware{
 			request.put("errorPageTitle", "´íÎó");
 		}
 		
-		if (errorPageTitle != null && errorReason != null){
+		if (errorReason != null){
 			request.put("errorReason", errorReason);
-			request.put("errorPageTitle",errorPageTitle);
+			session.remove("errorReason");
 		}
 		
+		if (errorPageTitle != null){
+			request.put("errorPageTitle",errorPageTitle);
+			session.remove("errorPageTitle");
+		}
 		return Status.SUCCESS;
 	}
 	

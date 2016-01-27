@@ -28,64 +28,64 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body>
 	<!-- 导航栏开始 -->
-	<div class="navbar navbar-static-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="brand" href="http://localhost:8080/OnlineJudge/">HITWH-CTF</a>
-				<ul class="nav">
-					<li><a href="http://localhost:8080/OnlineJudge/">首页</a></li>
-					<li><a href="http://localhost:8080/OnlineJudge/problemList">题目</a></li>
-					<li><a href="http://localhost:8080/OnlineJudge/showAnswers">答案公布</a></li>
-				</ul>
-				<s:if test="#session.isLogin">
-					<div class="nav pull-right">
-						<a class="dropdown-toggle navbar-text" data-toggle="dropdown"
-							href="#"><i class="icon-user"></i>Hyatt</a>
-						<ul class="dropdown-menu">
-							<li><a
-								href="http://localhost:8080/OnlineJudge/informationPanel">查看资料</a></li>
-							<li><a href="http://localhost:8080/OnlineJudge/logout">退出</a></li>
-						</ul>
-					</div>
-				</s:if>
-				<s:else>
-					<ul class="nav pull-right">
-						<li><a href="http://localhost:8080/OnlineJudge/loginPage"
-							data-toggle="modal">登录</a></li>
-						<li class="divider-vertical"></li>
-						<li><a href="http://localhost:8080/OnlineJudge/registerPage">注册</a></li>
+		<div class="navbar navbar-static-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="brand" href="<%=basePath%>">HITWH-CTF</a>
+					<ul class="nav">
+						<li><a href="<%=basePath%>">首页</a></li>
+						<li><a href="<%=basePath%>problemList">题目</a></li>
+						<li><a href="<%=basePath%>showAnswers">答案公布</a></li>
+						<s:if test="#session.isLogin">
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">我的分数<span class="caret"></span></a>
+                        	<ul class="dropdown-menu">
+                            	<li><a href="javascript:void(0)">总分:<s:property value="#session.score"/></a></li>
+                                <li><a href="javascript:void(0)">周总分:<s:property value="#session.weeklyScore"/></a></li>
+                            </ul>
+                        </li>
+                        </s:if>
 					</ul>
-
-				</s:else>
+					<s:if test="#session.isLogin">
+						<div class="nav pull-right">						
+							<a class="dropdown-toggle navbar-text" data-toggle="dropdown"
+								href="#"><i class="icon-user"></i>
+							<s:property value="#session.username" /></a>
+							<ul class="dropdown-menu">
+								<li><a href="<%=basePath%>informationPanel">查看资料</a></li>
+								<li><a href="<%=basePath%>logout">退出</a></li>
+							</ul>
+						</div>
+					</s:if>
+					<s:else>
+						<ul class="nav pull-right">
+							<li><a href="<%=basePath%>loginPage">登录</a></li>
+							<li class="divider-vertical"></li>
+							<li><a href="<%=basePath%>registerPage">注册</a></li>
+						</ul>
+					</s:else>
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- 导航栏结束 -->
+		<!-- 导航栏结束 -->
 	<div>
 		<div class="container">
 			<div class="row">
-				<div class="modal">
+				<div class="modal" style="margin-top:60px;">
 					<div class="modal-header">
 						<h4>
 							个人资料<span class="pull-right"><a
-								href="http://localhost:8080/updateInfo">完善资料</a></span>
+								href="<%=basePath %>updateInformationPage">完善/更改资料</a></span>
 						</h4>
 					</div>
 					<div class="modal-body">
+								<span style="font-size:14px;">完整度:</span>
 						<div class="styleprogress">
-							<span>&nbsp;&nbsp;完善度&nbsp;&nbsp;</span><span class="green"
-								style="width: 60%;"><span>60%</span></span>
+											
+							<span class="green"
+								style="width: ${request.completeness };"><span>${request.completeness }</span>
+							</span>
 						</div>
-						<div class="informationItem" style="height:110px;">
-							<div class="informationLabel">
-								<span>头像</span>
-							</div>
-							<div class="informationContent"
-								style=" height:110px; line-height:110px;">
-								<span><img
-									src="http://localhost:8080/OnlineJudge/getFavicon?stuid=${sessionScope.stuid}" /></span>
-							</div>
-						</div>
+						
 						<div class="informationItem">
 							<div class="informationLabel">
 								<span>用户名</span>
@@ -104,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 						<div class="informationItem">
 							<div class="informationLabel">
-								<span>昵称</span>
+								<span>真实姓名</span>
 							</div>
 							<div class="informationContent">
 								<span><s:property value="#request.ipui.realname" /></span>

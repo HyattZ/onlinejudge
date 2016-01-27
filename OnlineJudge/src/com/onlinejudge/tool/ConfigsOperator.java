@@ -7,7 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.net.URLDecoder;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.Properties;
 
 import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
@@ -23,7 +25,9 @@ public class ConfigsOperator {
 	
 	public String getProperties(String key) throws Exception{
 		Properties properties = new Properties();
-		File file = new File(this.getClass().getResource("/").getPath()+"/configs.properties");
+		String propertiesPath = this.getClass().getResource("/").getPath()+"configs.properties";
+		propertiesPath = URLDecoder.decode(propertiesPath, "UTF-8");
+		File file = new File(propertiesPath);
 		FileInputStream fileInputStream = new FileInputStream(file);
 		properties.load(fileInputStream);
 		String value = properties.getProperty(key);
@@ -36,15 +40,24 @@ public class ConfigsOperator {
 	
 	public void saveProperties(String key,String value) throws IOException{
 		Properties properties = new Properties();
-		File file = new File(this.getClass().getResource("/").getPath()+"/configs.properties");
+		String propertiesPath = this.getClass().getResource("/").getPath()+"/configs.properties";
+		propertiesPath = URLDecoder.decode(propertiesPath,"UTF-8");
+		File file = new File(propertiesPath);
 		FileInputStream fileInputStream = new FileInputStream(file);
 		properties.load(fileInputStream);
 		if (fileInputStream!=null){
 			fileInputStream.close();
 		}
-		OutputStream os = new FileOutputStream(this.getClass().getResource("/").getPath()
-				+ "configs.properties");
-		properties.setProperty(key, value);
+		OutputStream os = new FileOutputStream(propertiesPath);
+		for (Enumeration e  = properties.propertyNames() ;e.hasMoreElements();){
+			String s = (String) e.nextElement();
+			if (s.equals(key)){
+				properties.setProperty(key, value);
+			}else{
+				properties.setProperty(s, properties.getProperty(s));
+			}
+		}
+		
 		properties.store(os, null);
 		
 		if (os!=null){

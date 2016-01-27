@@ -19,8 +19,11 @@ import com.onlinejudge.constant.Status;
 import com.onlinejudge.domain.ProblemListItem;
 import com.onlinejudge.domain.database.Notice;
 import com.onlinejudge.domain.database.Problem;
+import com.onlinejudge.domain.database.SubmitTime;
 import com.onlinejudge.service.NoticeService;
 import com.onlinejudge.service.ProblemService;
+import com.onlinejudge.service.SubmitTimesService;
+import com.onlinejudge.tool.ConfigsOperator;
 
 /**
  * @author 赵笑天
@@ -36,7 +39,8 @@ public class ProblemListAction implements RequestAware,ServletContextAware,Sessi
 	private int problemPage;
 	private ServletContext context;
 	private Map<String,Object> session;
-	
+
+
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
@@ -74,8 +78,7 @@ public class ProblemListAction implements RequestAware,ServletContextAware,Sessi
 		this.problemPage = problemPage;
 	}
 
-	public String getMainPage() {
-		
+	/*public String getMainPage() {
 		long problemCount = problemService.getProblemCount();
 		// 获取可以得到的最大页面数
 		long maxIndex = problemCount / 5;
@@ -96,6 +99,17 @@ public class ProblemListAction implements RequestAware,ServletContextAware,Sessi
 		long values[] = getIndexs(problemCount, 5);
 		request.put("beginIndex", values[0]);
 		request.put("endIndex", values[1]);
+		return Status.SUCCESS;
+	}*/
+	
+	public String getProblemList() throws  Exception{
+		ConfigsOperator co = new ConfigsOperator();
+		int currentRound = Integer.parseInt(co.getProperties("currentRound"));
+		
+		List <ProblemListItem> problemListItems = problemService.getProblemListByRound(currentRound,session);
+		request.put("problemListItems", problemListItems);
+		
+		
 		return Status.SUCCESS;
 	}
 

@@ -15,14 +15,21 @@ import com.onlinejudge.tool.MD5;
  */
 @Component("loginFormBean")
 public class LoginFormBean {
-	private String username;
+	private String email;
 	private String password;
 	private String authCode;
 
 	public LoginFormBean(){
 		
 	}
+	public String getEmail() {
+		return email;
+	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	public String getAuthCode() {
 		return authCode;
 	}
@@ -31,13 +38,6 @@ public class LoginFormBean {
 		this.authCode = authCode;
 	}
 	
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
 
 	public String getPassword() {
 		return password;
@@ -48,7 +48,8 @@ public class LoginFormBean {
 	}
 	
 	public boolean validatePassword(String password){
-
+		System.out.println(password);
+		System.out.println(MD5.GetMD5Code(this.password));
 		if (password.equals(MD5.GetMD5Code(this.password))){
 			return true;
 		}else{
@@ -58,7 +59,7 @@ public class LoginFormBean {
 	
 	public boolean validateAuthCode(String authCode){
 	
-		if (this.authCode.equals(authCode)){
+		if (this.authCode.equalsIgnoreCase(authCode)){
 			return true;
 		}else{
 			return false;
@@ -71,9 +72,10 @@ public class LoginFormBean {
 	 * 
 	 **/
 	
-	public boolean validateUserName(){
+	public boolean validateEmail(){
 		//正则表达式匹配只有数字和字母组成的字符串,长度不超过字段长
-		String regex = "^[A-Za-z0-9]+$";
-		return (username.matches(regex)&username.length()<35);
+		String regex = "^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$";
+		return (email.matches(regex) && email.length() < 35);
 	}
+
 }

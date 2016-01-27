@@ -14,8 +14,10 @@ import com.onlinejudge.domain.database.Score;
  */
 public interface ScoreDao {
 
-	Score getScoreByStuid(int intValue);
+	public abstract Score getScoreByStuid(int intValue);
 
-	void updateScore(Score score, double d);
+	public abstract void updateScore(Score score, double d);
+
+	public abstract void save(Score score);
 	
 }

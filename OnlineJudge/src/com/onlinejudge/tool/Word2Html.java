@@ -24,26 +24,27 @@ import org.apache.poi.hwpf.converter.PicturesManager;
 import org.apache.poi.hwpf.converter.WordToHtmlConverter;
 import org.apache.poi.hwpf.usermodel.Picture;
 import org.apache.poi.hwpf.usermodel.PictureType;
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 
-
+@Component("word2Html")
 public class Word2Html {
-	
-/*	public static void main(String[] args){
-		try{
+
+/*	public static void main(String[] args) {
+		try {
 			convert2Html("D:/1.doc", "D:/1.html");
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	*/
+*/
 	public static void writeFile(String content, String path) {
 		FileOutputStream fos = null;
 		BufferedWriter bw = null;
 		try {
 			File file = new File(path);
 			fos = new FileOutputStream(file);
-			bw = new BufferedWriter(new OutputStreamWriter(fos,"GB2312"));
+			bw = new BufferedWriter(new OutputStreamWriter(fos, "GB2312"));
 			bw.write(content);
 		} catch (FileNotFoundException fnfe) {
 			fnfe.printStackTrace();
@@ -63,32 +64,31 @@ public class Word2Html {
 	public static void convert2Html(String fileName, String outPutFile)
 			throws TransformerException, IOException,
 			ParserConfigurationException {
-		HWPFDocument wordDocument = new HWPFDocument(new FileInputStream(fileName));//WordToHtmlUtils.loadDoc(new FileInputStream(inputFile));
+		HWPFDocument wordDocument = new HWPFDocument(new FileInputStream(
+				fileName));// WordToHtmlUtils.loadDoc(new
+							// FileInputStream(inputFile));
 		WordToHtmlConverter wordToHtmlConverter = new WordToHtmlConverter(
 				DocumentBuilderFactory.newInstance().newDocumentBuilder()
 						.newDocument());
-		 wordToHtmlConverter.setPicturesManager( new PicturesManager()
-         {
-             public String savePicture( byte[] content,
-                     PictureType pictureType, String suggestedName,
-                     float widthInches, float heightInches )
-             {
-                 return "test/"+suggestedName;
-             }
-         } );
+		wordToHtmlConverter.setPicturesManager(new PicturesManager() {
+			public String savePicture(byte[] content, PictureType pictureType,
+					String suggestedName, float widthInches, float heightInches) {
+				return "test/" + suggestedName;
+			}
+		});
 		wordToHtmlConverter.processDocument(wordDocument);
-		//save pictures
-		List pics=wordDocument.getPicturesTable().getAllPictures();
-		if(pics!=null){
-			for(int i=0;i<pics.size();i++){
-				Picture pic = (Picture)pics.get(i);
+		// save pictures
+		List pics = wordDocument.getPicturesTable().getAllPictures();
+		if (pics != null) {
+			for (int i = 0; i < pics.size(); i++) {
+				Picture pic = (Picture) pics.get(i);
 				System.out.println();
 				try {
 					pic.writeImageContent(new FileOutputStream("D:/test/"
 							+ pic.suggestFullFileName()));
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
-				}  
+				}
 			}
 		}
 		Document htmlDocument = wordToHtmlConverter.getDocument();

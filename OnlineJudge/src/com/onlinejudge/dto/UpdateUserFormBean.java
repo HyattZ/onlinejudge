@@ -10,36 +10,23 @@ import org.springframework.stereotype.Component;
  */
 @Component("updateUserFormBean")
 public class UpdateUserFormBean {
-	private int stuid;
+
 	private String username;
-	private String password;
 	private String realname;
 	private String qq;
 	private String phonenum;
-	private String email;
 	
 	public UpdateUserFormBean(){
 		
 	}
 	
-	public int getStuid() {
-		return stuid;
-	}
-	public void setStuid(int stuid) {
-		this.stuid = stuid;
-	}
 	public String getUsername() {
 		return username;
 	}
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+
 	public String getRealname() {
 		return realname;
 	}
@@ -58,17 +45,47 @@ public class UpdateUserFormBean {
 	public void setPhonenum(String phonenum) {
 		this.phonenum = phonenum;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	@Override
 	public String toString() {
-		return "UpdateUserFormBean [stuid=" + stuid + ", username=" + username
-				+ ", password=" + password + ", realname=" + realname + ", qq="
-				+ qq + ", phonenum=" + phonenum + ", email=" + email + "]";
+		return "UpdateUserFormBean [username=" + username + ", realname="
+				+ realname + ", qq=" + qq + ", phonenum=" + phonenum + "]";
+	}
+	
+	public boolean validateRealName() {
+		String regex = "^[\u4e00-\u9fa5]{2,}$";
+		if (this.realname.matches(regex)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	
+	public boolean validateQQ(){
+		String regex = "^[1-9][0-9]{4,9}$";
+		if (this.qq.matches(regex)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public boolean validatePhonenum(){
+		String regex = "^1\\d{10}$";
+		if (this.phonenum.matches(regex)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public boolean validateUserName() {
+		String regex = "^[a-zA-Z]\\w{5,24}$";
+		if (this.username.matches(regex)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

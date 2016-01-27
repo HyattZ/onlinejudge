@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.HierarchicalBeanFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
@@ -74,14 +75,14 @@ public class ProblemDaoImpl implements ProblemDao{
 	@Override
 	public SubmitPageProblemInfo getSFPProblem(int id) {
 		List list = hibernateTemplate.getSessionFactory()
-										.openSession()
-										.createSQLQuery("select problemid,problemtitle from Problem where problemid="+id)
+										.getCurrentSession()
+										.createSQLQuery("select problemid,problemtitle,problemcontent from Problem where problemid="+id)
 										.list();
 		if (list == null || list.size() ==0){
 			return null;
 		}else{
 			Object[] obj = (Object[]) list.get(0);
-			SubmitPageProblemInfo sfp = new SubmitPageProblemInfo((Integer)obj[0],(String)obj[1]);
+			SubmitPageProblemInfo sfp = new SubmitPageProblemInfo((Integer)obj[0],(String)obj[1],(String)obj[2]);
 			return sfp;
 		}
 	}
@@ -94,5 +95,70 @@ public class ProblemDaoImpl implements ProblemDao{
 			.get(com.onlinejudge.domain.database.Problem.class, problemid);
 		
 		return problem;
+	}
+
+	@Override
+	public boolean saveProblem(Problem problem) {
+		try{
+			hibernateTemplate.save(problem);
+			hibernateTemplate.flush();
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+
+
+	@Override
+	public List<Problem> getProblmeIdsByWeek(int week) {
+		List<Problem> problems = hibernateTemplate
+				.getSessionFactory()
+				.getCurrentSession()
+				.createQuery("from Problem where round = "+week)
+				.list();
+		
+		if (problems != null && problems.size() > 0){
+			return problems;
+		}
+		return null;
+	}
+
+	@Override
+	public int getWeekNum() {
+		int weekTotalNum = 0;
+		weekTotalNum = (Integer) hibernateTemplate
+				.getSessionFactory()
+				.getCurrentSession()
+				.createSQLQuery("select max(round) from Problem")
+				.uniqueResult();
+		return weekTotalNum;
+	}
+
+
+	@Override
+	public List<Problem> getProblemListByRound(int currentRound) {
+		List<Problem> problems = hibernateTemplate
+				.getSessionFactory()
+				.getCurrentSession()
+				.createQuery("from Problem where round="+currentRound)
+				.list();
+		if (problems != null && problems.size() > 0){
+			return problems;
+		}else{
+			return null;
+		}
+	}
+
+	@Override
+	public List<Integer> getProblemIdsByRound(int currentRound) {
+		List<Integer> problemIds = hibernateTemplate.getSessionFactory()
+				.getCurrentSession()
+				.createSQLQuery("select problemid from Problem where round="+currentRound)
+				.list();
+		if (problemIds != null && problemIds.size() > 0){
+			return problemIds;
+		}else{
+			return null;
+		}
 	}
 }

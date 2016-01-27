@@ -2,6 +2,8 @@ package com.onlinejudge.dao.impl;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -46,5 +48,28 @@ public class ProblemDaoImplTest {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 		ProblemDao pd = (ProblemDao) context.getBean("problemDaoImpl");
 		System.out.println(pd.getProblemByProblemid(1));
+	}
+	
+	@Test
+	public void testGetWeekNum(){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		ProblemDao pd = (ProblemDao) context.getBean("problemDaoImpl");
+		System.out.println(pd.getWeekNum());
+	}
+	
+	@Test
+	public void testGetProblmeIdsByWeek(){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		ProblemDao pd = (ProblemDao) context.getBean("problemDaoImpl");
+
+	}
+	
+	@Test
+	public void testGetProblemIdsByRound(){
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		ProblemDao pd = (ProblemDao) context.getBean("problemDaoImpl");
+		for (Integer integer:pd.getProblemIdsByRound(1)){
+			System.out.println(integer.intValue());
+		}
 	}
 }

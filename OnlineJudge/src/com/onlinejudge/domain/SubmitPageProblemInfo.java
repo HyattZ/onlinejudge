@@ -9,12 +9,19 @@ package com.onlinejudge.domain;
 public class SubmitPageProblemInfo {
 		private int problemid;
 		private String problemtitle;
+		private String problemcontent;
 		
 		public SubmitPageProblemInfo(int problemid,String problemtitle){
-			this.problemid = problemid;
-			this.problemtitle = problemtitle;
+			
 		}
 		
+		public SubmitPageProblemInfo(Integer problemid, String problemtitle,
+				String problemcontent) {
+			this.problemid = problemid;
+			this.problemtitle = problemtitle;
+			this.problemcontent = problemcontent;
+		}
+
 		public int getProblemid() {
 			return problemid;
 		}
@@ -34,6 +41,14 @@ public class SubmitPageProblemInfo {
 		public String toString() {
 			return "SubmitPageProblemInfo [problemid=" + problemid
 					+ ", problemtitle=" + problemtitle + "]";
+		}
+
+		public String getProblemcontent() {
+			return problemcontent;
+		}
+
+		public void setProblemcontent(String problemcontent) {
+			this.problemcontent = problemcontent;
 		}
 
 }

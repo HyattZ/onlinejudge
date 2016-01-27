@@ -1,6 +1,11 @@
 package com.onlinejudge.service;
 
+import java.util.Collection;
+import java.util.List;
+
+import com.onlinejudge.domain.NoticeInfo;
 import com.onlinejudge.domain.database.Notice;
+import com.onlinejudge.dto.NoticeFormBean;
 
 /**
  * @author ’‘–¶ÃÏ
@@ -9,5 +14,11 @@ import com.onlinejudge.domain.database.Notice;
  * 
  */
 public interface NoticeService {
-	public abstract Notice getLastestNotice();
+	public abstract NoticeInfo getLastestNotice();
+	
+	public abstract boolean addNotice(NoticeFormBean noticeFormBean);
+	
+	public abstract List<NoticeInfo> getNoticeList(int beginIndex, int length);
+	
+	public abstract int getNoticeCount();
 }

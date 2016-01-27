@@ -42,15 +42,16 @@ public class SessionInitializer implements Filter {
 		
 		if (servletRequest.getSession().getAttribute("isLogin") == null) {
 			servletRequest.getSession().setAttribute("isLogin", false);
-			
 		}
 		
 		if(servletRequest.getSession().getAttribute("loginStatus") == null){
 			servletRequest.getSession().setAttribute("loginStatus", IsLogin.NO);
 		}
+		
 		ThreadLocalSession.setSessionLocal(servletRequest.getSession());
 		ThreadLocalSession.setRequestLocal(servletRequest);
 		ThreadLocalSession.setResponseLocal((HttpServletResponse)response);
+		
 		chain.doFilter(request, response);
 	}
 

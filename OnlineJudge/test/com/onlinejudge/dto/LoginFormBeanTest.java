@@ -15,8 +15,8 @@ public class LoginFormBeanTest {
 	@Test
 	public void test() {
 		LoginFormBean lfb = new LoginFormBean();
-		lfb.setUsername("hhhhjkf02");
-		System.out.println(lfb.validateUserName());
+		/*lfb.setUsername("hhhhjkf02");
+		System.out.println(lfb.validateUserName());*/
 	}
 
 }

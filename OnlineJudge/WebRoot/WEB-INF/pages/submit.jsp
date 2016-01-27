@@ -23,8 +23,8 @@
 <style type="text/css">
 .showProblem {
 	width: 530px;
-	height: 80px;
-	line-height: 80px;
+	height: 60px;
+	line-height: 60px;
 }
 
 .linkToProblem {
@@ -35,49 +35,60 @@
 .problem {
 	width: 425px;
 	float: left;
-	font-size: 18px;
+	font-size: 16px;
 	color: #999;
 	font-style: italic;
+}
+.problemContent{
+	width:425px;
+	margin-left:60px;
+	margin-bottom:20px;
 }
 </style>
 </head>
 
 <body>
 
-	<!-- 导航栏开始 -->
-	<div class="navbar navbar-static-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="brand" href="http://localhost:8080/OnlineJudge/">HITWH-CTF</a>
-				<ul class="nav">
-					<li><a href="http://localhost:8080/OnlineJudge/">首页</a></li>
-					<li><a href="http://localhost:8080/OnlineJudge/problemList">题目</a></li>
-					<li><a href="http://localhost:8080/OnlineJudge/showAnswers">答案公布</a></li>
-				</ul>
-				<s:if test="#session.isLogin">
-					<div class="nav pull-right">
-						<a class="dropdown-toggle navbar-text" data-toggle="dropdown"
-							href="#"><i class="icon-user"></i>Hyatt</a>
-						<ul class="dropdown-menu">
-							<li><a
-								href="http://localhost:8080/OnlineJudge/informationPanel">查看资料</a></li>
-							<li><a href="http://localhost:8080/OnlineJudge/logout">退出</a></li>
-						</ul>
-					</div>
-				</s:if>
-				<s:else>
-					<ul class="nav pull-right">
-						<li><a href="http://localhost:8080/OnlineJudge/loginPage"
-							data-toggle="modal">登录</a></li>
-						<li class="divider-vertical"></li>
-						<li><a href="http://localhost:8080/OnlineJudge/registerPage">注册</a></li>
+<!-- 导航栏开始 -->
+		<div class="navbar navbar-static-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="brand" href="<%=basePath%>">HITWH-CTF</a>
+					<ul class="nav">
+						<li><a href="<%=basePath%>">首页</a></li>
+						<li><a href="<%=basePath%>problemList">题目</a></li>
+						<li><a href="<%=basePath%>showAnswers">答案公布</a></li>
+						<s:if test="#session.isLogin">
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">我的分数<span class="caret"></span></a>
+                        	<ul class="dropdown-menu">
+                            	<li><a href="javascript:void(0)">总分:<s:property value="#session.score"/></a></li>
+                                <li><a href="javascript:void(0)">周总分:<s:property value="#session.weeklyScore"/></a></li>
+                            </ul>
+                        </li>
+                        </s:if>
 					</ul>
-
-				</s:else>
+					<s:if test="#session.isLogin">
+						<div class="nav pull-right">						
+							<a class="dropdown-toggle navbar-text" data-toggle="dropdown"
+								href="#"><i class="icon-user"></i>
+							<s:property value="#session.username" /></a>
+							<ul class="dropdown-menu">
+								<li><a href="<%=basePath%>informationPanel">查看资料</a></li>
+								<li><a href="<%=basePath%>logout">退出</a></li>
+							</ul>
+						</div>
+					</s:if>
+					<s:else>
+						<ul class="nav pull-right">
+							<li><a href="<%=basePath%>loginPage">登录</a></li>
+							<li class="divider-vertical"></li>
+							<li><a href="<%=basePath%>registerPage">注册</a></li>
+						</ul>
+					</s:else>
+				</div>
 			</div>
 		</div>
-	</div>
-	<!-- 导航栏结束 -->
+		<!-- 导航栏结束 -->
 	<div>
 		<div class="container">
 			<div class="row">
@@ -95,6 +106,9 @@
 							<div class="linkToProblem">
 								<span><a class="navbar-text" href="#">开始做题</a></span>
 							</div>
+						</div>
+						<div class="problemContent">
+							<s:property value="#request.sfp.problemcontent"/>
 						</div>
 						<form action="submitFlag" method="post">
 							<div class="control-group" style="float:left; margin-left:50px;">
